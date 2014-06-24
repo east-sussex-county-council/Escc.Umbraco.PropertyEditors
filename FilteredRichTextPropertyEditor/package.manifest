@@ -1,0 +1,30 @@
+{
+    "propertyEditors":  [
+        {
+            "alias":  "Escc.Umbraco.PropertyEditors.FilteredRichTextPropertyEditor",
+            "name":  "Filtered rich text editor",
+            "editor":  {
+                "view": "~/App_Plugins/Escc.Umbraco.PropertyEditors.FilteredRichTextPropertyEditor/rte.html"
+            },
+            "prevalues": {
+                "fields":  [
+                    {
+                        "label": "Rich text editor settings",
+                        "view": "views/propertyeditors/rte/rte.prevalues.html",
+                        "hideLabel": true,
+                        "key": "editor"
+                    },
+                    {
+                        "label": "Hide Label",
+                        "view": "boolean",
+                        "key": "hideLabel"
+                    }
+                ]
+            }
+        }
+    ],
+    
+    "javascript":  [
+        "~/App_Plugins/Escc.Umbraco.PropertyEditors.FilteredRichTextPropertyEditor/controller.js"
+    ]
+}
