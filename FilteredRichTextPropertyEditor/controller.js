@@ -6,19 +6,31 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
     // taking care because "0" means false but is a truthy value when tested.
     $scope.model.hideLabel = ($scope.model.config.hideLabel === "1");
 
+    // Validation using the $parsers pipeline and a directive wasn't working with tinyMCE, but can be done from here.
+    // The inherited controller updates $scope.model.value from tinyMCE, so watch that change to validate. 
+    // Remove the watch when done to avoid a memory leak.
+    var stopWatching = $scope.$watch('model.value', function () {
+        var valid = $scope.model.value.indexOf("example") == -1;
+        $scope.propertyForm.validateThis.$setValidity('exampleValidator', valid);
+
+    });
+
+    $scope.$on('$destroy', function () {
+        stopWatching();
+    });
 
     // Apply filters to HTML as it is being saved. Need to get and set the content from the tinyMCE
     // editor rather than $scope.model.value, because the inherited controller above goes on to set 
     // $scope.model.value from tinyMCE, so if we don't change that our work will be overwritten.
     $scope.$on("formSubmitting", function(ev, args) {
-        var instance = tinymce.get($scope.model.alias + "_rte");
+       var instance = tinymce.get($scope.model.alias + "_rte");
         var html = instance.getContent();
         var filters = createFilters();
 
         angular.forEach(filters, function(filter) {
             html = filter(html);
         });
-
+ 
         instance.setContent(html);
     });
 

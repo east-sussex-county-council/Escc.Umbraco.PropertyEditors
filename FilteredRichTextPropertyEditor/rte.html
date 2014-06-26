@@ -1,3 +1,4 @@
 ﻿<div ng-controller="Escc.Umbraco.PropertyEditors.FilteredRichTextPropertyEditor.Controller" class="umb-editor umb-rte">
-    <textarea ng-model="model.value" rows="10" id="{{model.alias}}_rte"></textarea>
+    <textarea ng-model="model.value" rows="10" id="{{model.alias}}_rte" name="validateThis"></textarea>
+    <p ng-show="propertyForm.validateThis.$error.exampleValidator">Example validation message.</p>
 </div>
