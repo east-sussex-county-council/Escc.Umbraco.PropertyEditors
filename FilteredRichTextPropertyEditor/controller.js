@@ -8,33 +8,6 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
 
     // Load custom CSS for this editor
     assetsService.loadCss("/App_Plugins/Escc.Umbraco.PropertyEditors.FilteredRichTextPropertyEditor/styles.css");
-
-    setupFilters();
-
-    // Apply filters to HTML as it is being saved. Need to get and set the content from the tinyMCE
-    // editor rather than $scope.model.value, because the inherited controller above goes on to set 
-    // $scope.model.value from tinyMCE, so if we don't change that our work will be overwritten.
-    function setupFilters() {
-        $scope.$on("formSubmitting", function (ev, args) {
-            var instance = tinymce.get($scope.model.alias + "_rte");
-            var html = instance.getContent();
-            var filters = createFilters();
-
-            angular.forEach(filters, function(filter) {
-                html = filter(html);
-            });
-
-            instance.setContent(html);
-        });
-    }
-
-    // Create the filters which will be applied to HTML as it is saved. Each one should be a 
-    // function which accepts one string argument and returns a string.
-    function createFilters() {
-        var filters = [];
-        return filters;
-    }
-
 })
 .directive("validateRichText", function() {
     return {
@@ -108,4 +81,43 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
 
 
 
+})
+.directive("applyFormatters", function() {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, elem, attrs, ngModel) {
+
+            createFormatters();
+
+            // Apply formatters to HTML as it is being saved. Normally this is built into Angular, but we need 
+            // to get and set the content from the tinyMCE editor rather than $scope.model.value, because the 
+            // inherited controller above goes on to set $scope.model.value from tinyMCE, so if we rely on the
+            // default behaviour and don't change the tinyMCE value our work will be overwritten.
+            scope.$on("formSubmitting", function (ev, args) {
+                var instance = tinymce.get(scope.model.alias + "_rte");
+                var html = instance.getContent();
+
+                angular.forEach(ngModel.$formatters, function (format) {
+                    html = format(html);
+                });
+
+                instance.setContent(html);
+            });
+            
+            // Create the formatters which will be applied to HTML as it is saved.  
+            // Each one should be a function which accepts one string argument and returns a string. 
+            // Use ngModel.$formatters.push(formatter_function) to register a formatter.
+            function createFormatters() {
+
+                function exampleFormatter(value) {
+                    if (value) {
+                        // value = value.toUpperCase();
+                    }
+                    return value;
+                }
+                ngModel.$formatters.push(exampleFormatter);
+            }
+        }
+    }
 });

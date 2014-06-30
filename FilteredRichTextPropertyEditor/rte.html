@@ -2,7 +2,7 @@
     <div validate-rich-text="validate-rich-text">
         <p ng-show="propertyForm.$error.clickHere" class="alert alert-error clickHere"></p>
         <div ng-class="{'escc-invalid': propertyForm.$invalid}">
-            <textarea ng-model=" model.value" rows="10" id="{{model.alias}}_rte" name="validateThis"></textarea>
+            <textarea ng-model=" model.value" rows="10" id="{{model.alias}}_rte" name="validateThis" apply-formatters="apply-formatters"></textarea>
         </div>
     </div>
 </div>
