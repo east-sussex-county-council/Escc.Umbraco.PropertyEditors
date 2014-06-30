@@ -55,6 +55,7 @@
     <Content Include=".gitignore" />
     <Content Include="FilteredRichTextPropertyEditor\controller.js" />
     <Content Include="FilteredRichTextPropertyEditor\rte.html" />
+    <Content Include="FilteredRichTextPropertyEditor\styles.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
