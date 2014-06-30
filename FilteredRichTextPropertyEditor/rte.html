@@ -1,7 +1,8 @@
 ﻿<div ng-controller="Escc.Umbraco.PropertyEditors.FilteredRichTextPropertyEditor.Controller" class="umb-editor umb-rte">
-    <p ng-show="propertyForm.$error.exampleValidator" class="alert alert-error exampleValidator"></p>
-    <p ng-show="propertyForm.$error.testValidator" class="alert alert-error testValidator"></p>
-    <div validate-rich-text="validate-rich-text" ng-class="{'escc-invalid': propertyForm.$invalid}">
-        <textarea ng-model=" model.value" rows="10" id="{{model.alias}}_rte" name="validateThis"></textarea>
+    <div validate-rich-text="validate-rich-text">
+        <p ng-show="propertyForm.$error.clickHere" class="alert alert-error clickHere"></p>
+        <div ng-class="{'escc-invalid': propertyForm.$invalid}">
+            <textarea ng-model=" model.value" rows="10" id="{{model.alias}}_rte" name="validateThis"></textarea>
+        </div>
     </div>
 </div>

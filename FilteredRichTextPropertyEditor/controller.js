@@ -49,7 +49,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
             var stopWatching = scope.$watch('model.value', function () {
                 angular.forEach(validators, function (validator) {
                     var valid = validator.validate(scope.model.value);
-                    $("." + validator.id, elem.parentNode).html(validator.message || validator.template);
+                    $("." + validator.id, elem).html(validator.message || validator.template);
                     scope.propertyForm.$setValidity(validator.id, valid);
                 });
             });
@@ -58,15 +58,49 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
                 stopWatching();
             });
 
-            // Create the validators which will be checked before the field can be saved.
+            // Create the validators which will be checked before the field can be saved. Should return an array of objects,
+            // each with the following interface:
+            //
+            // { 
+            //      id: 'a unique alias',
+            //      template: 'an error message',
+            //      validate: function (value) { return true if value is valid; false if not; }
+            // }
+            //
+            // The validate function can optionally set this.message to a custom error message, which will be used instead of .template.
+            //
+            // The view should include an element similar to the following as a direct child of the element invoking this directive. 
+            // Replace 'alias' with the unique alias specified in the interface above:
+            //
+            //      <p ng-show="propertyForm.$error.alias" class="alert alert-error alias"></p>
+            // 
             function createValidators() {
                 return [
-                    { id: 'exampleValidator', template: 'example message', validate: function (value) {
-                            this.message = 'custom message for example';
-                            return (!value) || value.indexOf("example") == -1;
+                    {
+                        id: 'clickHere',
+                        template: "You linked to '{0}'. Links must make sense on their own, out of context. Linking to 'click here' or anything similar doesn't do that. You should normally use the main heading of the destination page as your link text.",
+                        validate: function (value) {
+                            if (!value) return true;
+
+                            var anythingExceptEndAnchor = "((?!</a>).)*", regex, match;
+
+                            // Check for links involving the phrase 'click here'
+                            regex = new RegExp("<a [^>]*>(" + anythingExceptEndAnchor + "\\bclick\\s+here\\b" + anythingExceptEndAnchor + ")</a>", "i");
+                            match = regex.exec(value);
+
+                            // If not found, check for links which just use the word 'here'
+                            if (!match) {
+                                regex = new RegExp("<a [^>]*>(\\s*here\\s*)</a>", "i");
+                                match = regex.exec(value);
+                            }
+
+                            // If invalid, show a custom message which includes the invalid link text
+                            if (match) {
+                                this.message = this.template.replace("{0}", match[1]);
+                            }
+                            return !match;
                         }
-                    },
-                    { id: 'testValidator', template: 'test message', validate: function (value) { return (!value) || value.indexOf("test") == -1; } }
+                    }
                 ];
             }
         }
