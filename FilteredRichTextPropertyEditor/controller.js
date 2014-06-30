@@ -41,14 +41,15 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
         restrict: 'A',
         link: function(scope, elem, attrs) {
 
+            var validators = createValidators();
+
             // Validation using the $parsers pipeline wasn't working with tinyMCE, but can be done by watching for 
             // changes to $scope.model.value, which is updated from tinyMCE by the inherited controller. 
             // Remove the watch when done to avoid a memory leak.
-            var validators = createValidators();
-
             var stopWatching = scope.$watch('model.value', function () {
                 angular.forEach(validators, function (validator) {
                     var valid = validator.validate(scope.model.value);
+                    $("." + validator.id, elem.parentNode).html(validator.message || validator.template);
                     scope.propertyForm.$setValidity(validator.id, valid);
                 });
             });
@@ -60,8 +61,12 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
             // Create the validators which will be checked before the field can be saved.
             function createValidators() {
                 return [
-                    { id: 'exampleValidator', validate: function (value) { return (!value) || value.indexOf("example") == -1; } },
-                    { id: 'testValidator', validate: function (value) { return (!value) || value.indexOf("test") == -1; } }
+                    { id: 'exampleValidator', template: 'example message', validate: function (value) {
+                            this.message = 'custom message for example';
+                            return (!value) || value.indexOf("example") == -1;
+                        }
+                    },
+                    { id: 'testValidator', template: 'test message', validate: function (value) { return (!value) || value.indexOf("test") == -1; } }
                 ];
             }
         }
