@@ -108,9 +108,21 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
                             return !match;
                         }
     
-                    }
+                    },
+                {
+                    id: 'more',
+                    template: "You linked to '{0}'. Links must make sense on their own, out of context. Linking to 'More' doesn't do that. Link to 'More about [your subject]' instead.",
+                    validate: function (value) {
 
-                ];
+                        // Regex matches any link where the A-Z characters are "More". 
+                        var match = /<a [^>]*>(More[^A-Z]*)<\/a>/i.exec(value);
+
+                        if (match) {
+                            this.message = this.template.replace("{0}", match[1]);
+                        }
+                        return !match;
+                    }
+                }];
             }
         }
     }
