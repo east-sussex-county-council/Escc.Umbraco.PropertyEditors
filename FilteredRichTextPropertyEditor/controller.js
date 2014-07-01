@@ -332,6 +332,15 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
 
                     return value;
                 });
+
+                // headings should start with a captial letter
+                ngModel.$formatters.push(function(value) {
+                    return value.replace(/(<h[1|2|3|4|5|6]>)("|'|&ldquo;|&lsquo;)?([a-z])/, function (match, tag, punc, first) {
+                        return tag + (punc || '') + first.toUpperCase();
+                    });
+                });
+
+
             }
         }
     }
