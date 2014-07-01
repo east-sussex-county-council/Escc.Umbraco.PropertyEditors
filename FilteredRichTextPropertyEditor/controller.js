@@ -268,6 +268,11 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
                 ngModel.$formatters.push(function(value) {
                     return value.replace(".</a>", "</a>.");
                 });
+                
+                // Move spaces outside links
+                ngModel.$formatters.push(function (value) {
+                    return value.replace(/\s+<\/a>/, "</a> ");
+                });
 
                 // Convert dumb quotes to smart quotes
                 ngModel.$formatters.push(function(value) {
