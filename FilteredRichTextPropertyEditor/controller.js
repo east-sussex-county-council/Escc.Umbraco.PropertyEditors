@@ -250,6 +250,11 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
                 ngModel.$formatters.push(function(value) {
                     return value.replace(/ target=[^>][a-z_]+[^>]/i, "");
                 });
+
+                // Strip tags which require attributes if they don't have any attributes, eg <a>link text</a>
+                ngModel.$formatters.push(function(value) {
+                    return value.replace(/<a\s*>([^<]*)<\/a>/i, "$1");
+                });
             }
         }
     }
