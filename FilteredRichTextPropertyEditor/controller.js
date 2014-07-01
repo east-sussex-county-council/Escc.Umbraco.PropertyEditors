@@ -230,6 +230,11 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
             // Use ngModel.$formatters.push(formatter_function) to register a formatter.
             function createFormatters() {
 
+                // Remove any non-breaking spaces
+                ngModel.$formatters.push(function(value) {
+                    return value.replace('&nbsp;', ' ');
+                });
+
                 // Remove any block elements with no content
                 ngModel.$formatters.push(function(value) {
                     if (value) {
@@ -241,9 +246,9 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
                     return value;
                 });
 
-                // Remove any non-breaking spaces
+                // Remove target attribute to ensure *users* get to choose whether to open links in a new window
                 ngModel.$formatters.push(function(value) {
-                    return value.replace('&nbsp;', ' ');
+                    return value.replace(/ target=[^>][a-z_]+[^>]/i, "");
                 });
             }
         }
