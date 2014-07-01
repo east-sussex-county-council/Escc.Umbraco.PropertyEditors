@@ -109,20 +109,72 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
                         }
     
                     },
-                {
-                    id: 'more',
-                    template: "You linked to '{0}'. Links must make sense on their own, out of context. Linking to 'More' doesn't do that. Link to 'More about [your subject]' instead.",
-                    validate: function (value) {
 
-                        // Regex matches any link where the A-Z characters are "More". 
-                        var match = /<a [^>]*>(More[^A-Z]*)<\/a>/i.exec(value);
+                    {
+                        id: 'more',
+                        template: "You linked to '{0}'. Links must make sense on their own, out of context. Linking to 'More' doesn't do that. Link to 'More about [your subject]' instead.",
+                        validate: function (value) {
 
-                        if (match) {
-                            this.message = this.template.replace("{0}", match[1]);
+                            // Regex matches any link where the A-Z characters are "More". 
+                            var match = /<a [^>]*>(More[^A-Z]*)<\/a>/i.exec(value);
+
+                            if (match) {
+                                this.message = this.template.replace("{0}", match[1]);
+                            }
+                            return !match;
                         }
-                        return !match;
-                    }
-                }];
+                    },
+
+                    {
+                        id: 'allCaps',
+                        template: "You typed '{0}'. Don't write in uppercase as it's seen as <span style=\"text-transform:uppercase\">shouting</span> and, for partially sighted users, it's read out one letter at a time.",
+                        validate: function(value) {
+                            // Check that the HTML does not include consecutive words in all caps.
+                            
+                            // Strip tags to avoid them getting between words, and to avoid matching anything in attributes. First though, finish certain block elements with a 
+                            // fullstop so that it doesn't run into the following paragraph and get counted as consecutive words. 
+                            value = value.replace(/<\/(h[1-6]|li)>/ig, ". ");
+                            value = value.replace(/(<([^>]+)>)/ig,"");
+
+                            // Strip any common acronyms, to avoid matching them as false positives. eg NHS.
+                            var allowed = ["NHS", "GP", "UK", "KPMG LLP"];
+                            value = value.replace(new RegExp("\\b(" + allowed.join("|") + ")\\b", "g"), "");
+
+                            // Regex matches two or more consecutive words in all caps. But:
+                            //
+                            // -- Words with numbers are not included because that traps postcodes. 
+                            // -- Because we're looking for space after the second word (to avoid matching "EXAMPLE Example"), we need a second test to trap
+                            //    two words in CAPS at the end of a string. 
+                            // -- Because we don't want to match "Example) ACRONYM" with ")" counted as the first word, we need to require the A-Z and 
+                            //    make the punctuation optional. 
+                            // -- Because we don't want to match the end of a sentence (eg "this is PROBABLY. OK for once") the punctuation only includes 
+                            //    that which always appears mid-sentence.
+                            var punctuationBeforeWord = "['\"(]*",
+                                punctuationAfterWord = "[,)'\"]*",
+                                word = punctuationBeforeWord + "[A-Z-']{2,}" + punctuationAfterWord;
+
+                            // mid-sentence
+                            var match = new RegExp("(" + word + "\\s+){2,}").exec(value);
+
+                            // end of sentence
+                            if (!match)
+                            {
+                                match = new RegExp("(" + word + "\\s+)+" + word + "[.?!:;]").exec(value);
+                            }
+
+                            // end of string
+                            if (!match)
+                            {
+                                match = new RegExp("(" + word + "\\s+)+" + word + "$").exec(value);
+                            }
+
+                            if (match)
+                            {
+                                this.message = this.template.replace("{0}", match[0].trim());
+                            }
+                            return !match;
+                        }
+                    }];
             }
         }
     }
