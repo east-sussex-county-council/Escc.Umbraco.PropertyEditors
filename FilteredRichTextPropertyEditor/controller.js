@@ -263,6 +263,11 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
                     value = value.replace(/\sinternet\b/, " Internet");
                     return value;
                 });
+
+                // Move fullstops outside links
+                ngModel.$formatters.push(function(value) {
+                    return value.replace(".</a>", "</a>.");
+                });
             }
         }
     }
