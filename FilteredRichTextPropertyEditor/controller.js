@@ -48,24 +48,20 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
             //      <p ng-show="propertyForm.$error.alias" class="alert alert-error alias"></p>
             // 
             function createValidators() {
+                var anythingExceptEndAnchor = "((?!</a>).)*";
+
                 return [
                     {
                         id: 'clickHere',
-                        template: "You linked to '{0}'. Links must make sense on their own, out of context. Linking to 'click here' or anything similar doesn't do that. You should normally use the main heading of the destination page as your link text.",
+                        template: "You linked to '{0}'. Links must make sense on their own, out of context. Linking to 'click here' doesn't do that. You should normally use the main heading of the destination page as your link text.",
                         validate: function (value) {
                             if (!value) return true;
 
-                            var anythingExceptEndAnchor = "((?!</a>).)*", regex, match;
+                            var regex, match;
 
                             // Check for links involving the phrase 'click here'
                             regex = new RegExp("<a [^>]*>(" + anythingExceptEndAnchor + "\\bclick\\s+here\\b" + anythingExceptEndAnchor + ")</a>", "i");
                             match = regex.exec(value);
-
-                            // If not found, check for links which just use the word 'here'
-                            if (!match) {
-                                regex = new RegExp("<a [^>]*>(\\s*here\\s*)</a>", "i");
-                                match = regex.exec(value);
-                            }
 
                             // If invalid, show a custom message which includes the invalid link text
                             if (match) {
@@ -73,7 +69,47 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
                             }
                             return !match;
                         }
+                    },
+
+                    {
+                        id: 'linkToHere',
+                        template: "You linked to '{0}'. Links must make sense on their own, out of context. Linking to 'here' doesn't do that. You should normally use the main heading of the destination page as your link text.",
+                        validate: function (value) {
+                            if (!value) return true;
+
+                            // Check for links which just use the word 'here'
+                            var regex = new RegExp("<a [^>]*>(\\s*here\\s*)</a>", "i");
+                            var match = regex.exec(value);
+
+                            // If invalid, show a custom message which includes the invalid link text
+                            if (match) {
+                                this.message = this.template.replace("{0}", match[1]);
+                            }
+                            return !match;
+                        }
+                    },
+
+                    {
+                        id: 'visit',
+                        template: "You linked to '{0}'. You don't need to start links with 'visit'. You should normally use the main heading of the destination page as your link text.",
+                        validate: function(value) {
+                            if (!value) return true;
+                            
+                            // Regex matches any link starting with the word "visit" in it. 
+                            var anythingExceptVisit = "((?!visit).)*";
+
+                            // Check for links where the text starts with 'Visit' but visit isn't in the URL. eg <a href="/page.html">Visit my page</a>
+                            var regex = new RegExp("<a [^>]*href=['\"]" + anythingExceptVisit + "['\"][^>]*>(Visit\\s+" + anythingExceptEndAnchor + ")</a>", "i");
+                            var match = regex.exec(value);
+
+                            if (match) {
+                                this.message = this.template.replace("{0}", match[2]);
+                            }
+                            return !match;
+                        }
+    
                     }
+
                 ];
             }
         }
