@@ -230,13 +230,17 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
             // Use ngModel.$formatters.push(formatter_function) to register a formatter.
             function createFormatters() {
 
-                function exampleFormatter(value) {
+                // Remove any block elements with no content
+                function stripEmptyBlockElements(value) {
                     if (value) {
-                        // value = value.toUpperCase();
+                        var blockElements = [ "address", "blockquote", "dl", "p", "h1", "h2", "h3", "h4", "h5", "h6", "ol", "table", "ul", "dd", "dt", "li", "tbody", "td", "tfoot", "th", "thead", "tr" ];
+                        angular.forEach(blockElements, function(element) {
+                            value = value.replace(new RegExp("<" + element + "[^>]*>(\\s*|&nbsp;)</" + element + ">","gi"), "");
+                        });
                     }
                     return value;
                 }
-                ngModel.$formatters.push(exampleFormatter);
+                ngModel.$formatters.push(stripEmptyBlockElements);
             }
         }
     }
