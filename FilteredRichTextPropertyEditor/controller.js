@@ -231,7 +231,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
             function createFormatters() {
 
                 // Remove any block elements with no content
-                function stripEmptyBlockElements(value) {
+                ngModel.$formatters.push(function(value) {
                     if (value) {
                         var blockElements = [ "address", "blockquote", "dl", "p", "h1", "h2", "h3", "h4", "h5", "h6", "ol", "table", "ul", "dd", "dt", "li", "tbody", "td", "tfoot", "th", "thead", "tr" ];
                         angular.forEach(blockElements, function(element) {
@@ -239,8 +239,12 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
                         });
                     }
                     return value;
-                }
-                ngModel.$formatters.push(stripEmptyBlockElements);
+                });
+
+                // Remove any non-breaking spaces
+                ngModel.$formatters.push(function(value) {
+                    return value.replace('&nbsp;', ' ');
+                });
             }
         }
     }
