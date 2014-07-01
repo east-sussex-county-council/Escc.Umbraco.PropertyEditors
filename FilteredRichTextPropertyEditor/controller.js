@@ -255,6 +255,14 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
                 ngModel.$formatters.push(function(value) {
                     return value.replace(/<a\s*>([^<]*)<\/a>/i, "$1");
                 });
+
+                // Correct common phrases
+                ngModel.$formatters.push(function(value) {
+                    value = value.replace("Brighton and Hove", "Brighton &amp; Hove");
+                    value = value.replace("national curriculum", "National Curriculum");
+                    value = value.replace(/\sinternet\b/, " Internet");
+                    return value;
+                });
             }
         }
     }
