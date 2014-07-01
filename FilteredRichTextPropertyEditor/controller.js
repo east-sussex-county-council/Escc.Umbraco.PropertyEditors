@@ -313,6 +313,20 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
 
                     return root.body.innerHTML;
                 });
+
+                // Replace hyphens-used-as-dashes with en-dashes
+                ngModel.$formatters.push(function(value) {
+                    value = value.replace(/([a-z0-9>)])\s+-\s+([(<a-z0-9])/gi, "$1 &#8211; $2"); // replace between clauses
+                    value = value.replace(/([0-9])-([0-9])/gi, "$1&#8211;$2"); // replace numerical ranges
+
+                    // undo previous within urls
+                    var urlNDashPattern = /([a-z]:\/)?(\/?)([^\s]*)([0-9]+)(&#8211;|&ndash;)([0-9])/i;
+                    while (urlNDashPattern.test(value)) {
+                        value = value.replace(urlNDashPattern, "$1$2$3$4-$6");
+                    }
+
+                    return value;
+                });
             }
         }
     }
