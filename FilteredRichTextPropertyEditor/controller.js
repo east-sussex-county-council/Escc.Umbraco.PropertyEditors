@@ -340,6 +340,33 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
                     });
                 });
 
+                /// Ensures the first letter in the placeholder is uppercase, eg for placeholders containing a heading
+                ngModel.$formatters.push(function(value) {
+                    var index = 0;
+                    var length = value.length;
+                    var outOfTag = true;
+
+                    while (index < length) {
+                        if (value[index] == '<') {
+                            outOfTag = false;
+                        } else if (value[index] == '>') {
+                            outOfTag = true;
+                        } else if (outOfTag) {
+                            // Include numbers even though toUpperCase() won't change them, because if a placeholder starts with a number
+                            // the following letter is probably not the start of a sentence or heading (eg 11am)
+                            var match = /^[A-Za-z0-9]$/.test(value[index]);
+                            if (match) {
+                                var corrected = (value.substr(0, index) + value.substr(index, 1).toUpperCase());
+                                if (length > index) corrected += value.substr(index + 1);
+                                return corrected;
+                            }
+                        }
+                        index++;
+                    }
+
+                    return value;
+                });
+
                 // ellipsis - this takes several passes as the match stops when it finds 3 rather than greedily matching all consecutive . characters
                 ngModel.$formatters.push(function(value) {
                     value = value.replace("…", "&#8230;");
