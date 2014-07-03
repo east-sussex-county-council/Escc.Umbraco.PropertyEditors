@@ -214,6 +214,8 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
             // to get and set the content from the tinyMCE editor rather than $scope.model.value, because the 
             // inherited controller above goes on to set $scope.model.value from tinyMCE, so if we rely on the
             // default behaviour and don't change the tinyMCE value our work will be overwritten.
+            //
+            // Note: this is done on save rather than on change to avoid moving the cursor unexpectedly in TinyMCE.
             scope.$on("formSubmitting", function (ev, args) {
                 var instance = tinymce.get(scope.model.alias + "_rte");
                 var html = instance.getContent();
