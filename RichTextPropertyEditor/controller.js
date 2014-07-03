@@ -1,4 +1,4 @@
-angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichTextPropertyEditor.Controller", function ($scope, $controller, assetsService) {
+angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPropertyEditor.Controller", function ($scope, $controller, assetsService) {
     // Inherit the behaviour of the standard rich text editor
     $controller("Umbraco.PropertyEditors.RTEController", { $scope: $scope });
 
@@ -7,7 +7,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.FilteredRichT
     $scope.model.hideLabel = ($scope.model.config.hideLabel === "1");
 
     // Load custom CSS for this editor
-    assetsService.loadCss("/App_Plugins/Escc.Umbraco.PropertyEditors.FilteredRichTextPropertyEditor/styles.css");
+    assetsService.loadCss("/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/styles.css");
 })
 .directive("validateRichText", function() {
     return {
