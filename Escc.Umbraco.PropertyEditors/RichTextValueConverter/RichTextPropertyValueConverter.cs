@@ -4,10 +4,18 @@ using Umbraco.Web.Templates;
 
 namespace Escc.Umbraco.PropertyEditors.RichTextValueConverter
 {
+    /// <summary>
+    /// A PropertyValueConverter for rich text saved in Umbraco, which runs formatters on the HTML before it is returned for display
+    /// </summary>
     [PropertyValueType(typeof(string))]
     [PropertyValueCache(PropertyCacheValue.All, PropertyCacheLevel.Request)]
     public class RichTextPropertyValueConverter : PropertyValueConverterBase
     {
+        /// <summary>
+        /// Specifies the alias of the property editor the converter acts upon.
+        /// </summary>
+        /// <param name="propertyType">Type of the property.</param>
+        /// <returns></returns>
         public override bool IsConverter(PublishedPropertyType propertyType)
         {
             return propertyType.PropertyEditorAlias == "Escc.Umbraco.PropertyEditors.RichTextPropertyEditor";

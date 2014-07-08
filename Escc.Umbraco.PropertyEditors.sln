@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escc.Umbraco.PropertyEditors", "Escc.Umbraco.PropertyEditors.csproj", "{2032BE1F-41FA-4B0B-A331-4D28091D47D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escc.Umbraco.PropertyEditors", "Escc.Umbraco.PropertyEditors\Escc.Umbraco.PropertyEditors.csproj", "{2032BE1F-41FA-4B0B-A331-4D28091D47D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escc.Umbraco.PropertyEditors.Tests", "Escc.Umbraco.PropertyEditors.Tests\Escc.Umbraco.PropertyEditors.Tests.csproj", "{A4F48148-CC6D-42E7-B30A-BF226AC193FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2032BE1F-41FA-4B0B-A331-4D28091D47D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2032BE1F-41FA-4B0B-A331-4D28091D47D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2032BE1F-41FA-4B0B-A331-4D28091D47D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4F48148-CC6D-42E7-B30A-BF226AC193FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4F48148-CC6D-42E7-B30A-BF226AC193FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4F48148-CC6D-42E7-B30A-BF226AC193FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4F48148-CC6D-42E7-B30A-BF226AC193FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
