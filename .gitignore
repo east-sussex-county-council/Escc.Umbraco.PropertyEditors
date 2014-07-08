@@ -27,7 +27,7 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
-[Ww]eb*.config
+[Aa]pp.config
 *.scc
 [Ss]cripts*/
 packages/
