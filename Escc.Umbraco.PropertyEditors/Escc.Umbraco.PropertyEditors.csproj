@@ -195,9 +195,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RichTextValueConverter\EncodeEmailAddressFormatter.cs" />
     <Compile Include="RichTextValueConverter\IHtmlFormatter.cs" />
     <Compile Include="RichTextValueConverter\RichTextPropertyValueConverter.cs" />
     <Compile Include="RichTextValueConverter\TinyMceEmbedClassFormatter.cs" />
+    <Compile Include="RichTextValueConverter\UseFormForEmailLinksFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -208,6 +210,12 @@
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\controller.js" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\rte.html" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\styles.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Escc.HouseStyle\EsccWebTeam.HouseStyle.csproj">
+      <Project>{1C429378-DBF2-4AF7-88AC-C059AA163682}</Project>
+      <Name>EsccWebTeam.HouseStyle</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

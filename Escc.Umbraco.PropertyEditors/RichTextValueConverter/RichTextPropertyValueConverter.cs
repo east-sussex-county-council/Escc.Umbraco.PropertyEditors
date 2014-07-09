@@ -30,7 +30,7 @@ namespace Escc.Umbraco.PropertyEditors.RichTextValueConverter
             sourceString = TemplateUtilities.ParseInternalLinks(sourceString);
             sourceString = TemplateUtilities.ResolveUrlsFromTextString(sourceString);
 
-            var formatters = new IHtmlFormatter[] { new TinyMceEmbedClassFormatter() };
+            var formatters = new IHtmlFormatter[] { new TinyMceEmbedClassFormatter(), new UseFormForEmailLinksFormatter(), new EncodeEmailAddressFormatter() };
 
             foreach (var formatter in formatters)
             {
