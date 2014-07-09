@@ -195,6 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RichTextValueConverter\ElibraryLinkFormatter.cs" />
     <Compile Include="RichTextValueConverter\EncodeEmailAddressFormatter.cs" />
     <Compile Include="RichTextValueConverter\IHtmlFormatter.cs" />
     <Compile Include="RichTextValueConverter\RichTextPropertyValueConverter.cs" />
@@ -212,6 +213,10 @@
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\styles.css" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Escc.Elibrary\Escc.Elibrary.csproj">
+      <Project>{3D2240E0-D165-4C52-A97B-730542975D3A}</Project>
+      <Name>Escc.Elibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Escc.HouseStyle\EsccWebTeam.HouseStyle.csproj">
       <Project>{1C429378-DBF2-4AF7-88AC-C059AA163682}</Project>
       <Name>EsccWebTeam.HouseStyle</Name>

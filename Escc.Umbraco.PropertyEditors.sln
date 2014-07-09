@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EsccWebTeam.Data.Web", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EsccWebTeam.Gdsc", "..\Escc.Gdsc\EsccWebTeam.Gdsc.csproj", "{A0024354-DD16-43E1-8574-176F8BA4F1CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escc.Elibrary", "..\Escc.Elibrary\Escc.Elibrary.csproj", "{3D2240E0-D165-4C52-A97B-730542975D3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{A0024354-DD16-43E1-8574-176F8BA4F1CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0024354-DD16-43E1-8574-176F8BA4F1CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0024354-DD16-43E1-8574-176F8BA4F1CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D2240E0-D165-4C52-A97B-730542975D3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D2240E0-D165-4C52-A97B-730542975D3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D2240E0-D165-4C52-A97B-730542975D3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D2240E0-D165-4C52-A97B-730542975D3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
