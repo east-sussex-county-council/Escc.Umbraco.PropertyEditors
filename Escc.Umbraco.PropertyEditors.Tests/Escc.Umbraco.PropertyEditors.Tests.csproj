@@ -50,6 +50,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Escc.Umbraco.PropertyEditors\Escc.Umbraco.PropertyEditors.csproj">
+      <Project>{4d01c402-9863-498b-96b8-4fbe69643995}</Project>
+      <Name>Escc.Umbraco.PropertyEditors</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
