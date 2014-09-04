@@ -1,0 +1,24 @@
+{
+    "propertyEditors":  [
+        {
+            "alias":  "Escc.Umbraco.PropertyEditors.BooleanPropertyEditor",
+            "name":  "Boolean",
+            "editor":  {
+                "view": "~/App_Plugins/Escc.Umbraco.PropertyEditors.BooleanPropertyEditor/boolean.html"
+            },
+            "prevalues": {
+                "fields":  [
+                    {
+                        "label": "Default value",
+                        "view": "boolean",
+                        "key": "defaultValue"
+                    }
+                ]
+            }
+        }
+    ],
+    
+    "javascript":  [
+        "~/App_Plugins/Escc.Umbraco.PropertyEditors.BooleanPropertyEditor/controller.js"
+    ]
+}
