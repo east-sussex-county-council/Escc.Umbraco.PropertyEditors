@@ -4,7 +4,8 @@
             "alias":  "Escc.Umbraco.PropertyEditors.RichTextPropertyEditor",
             "name":  "Rich text editor (ESCC)",
             "editor":  {
-                "view": "~/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/rte.html"
+                "view": "~/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/rte.html",
+                "valueType": "TEXT"
             },
             "prevalues": {
                 "fields":  [
