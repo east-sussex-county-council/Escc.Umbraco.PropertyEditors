@@ -209,6 +209,23 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                     });
                 }
 
+                /// Checks that the HTML placeholder does not contain any text outside links
+                if (validatorsToApply.indexOf('onlyLinks') != -1) {
+                    validatorsToReturn.push({
+                        id: 'onlyLinks',
+                        template: 'This field should only contain links.',
+                        validate: function(value) {
+                            if (!value) return true;
+
+                            // Remove links including link text, remove tags, anything left is an error
+                            value = value.replace(/<a [^>]*>.*?<\/a>/, '');
+                            value = value.replace(/<[^>]*>/, '');
+                            value = value.trim();
+                            return (value == true);
+                        }
+                    });
+                }
+
                 return validatorsToReturn;
             }
         }
