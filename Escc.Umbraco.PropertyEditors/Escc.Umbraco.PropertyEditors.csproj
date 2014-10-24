@@ -245,6 +245,8 @@
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.BooleanPropertyEditor\boolean.html" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.BooleanPropertyEditor\controller.js" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\package.manifest" />
+    <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\prevalues.controller.js" />
+    <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\rte.prevalues.html" />
     <Content Include="packages.config" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.BooleanPropertyEditor\package.manifest" />
     <None Include="Web.example.config" />

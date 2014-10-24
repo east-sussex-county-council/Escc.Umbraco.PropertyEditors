@@ -11,7 +11,7 @@
                 "fields":  [
                     {
                         "label": "Rich text editor settings",
-                        "view": "views/propertyeditors/rte/rte.prevalues.html",
+                        "view": "~/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/rte.prevalues.html",
                         "hideLabel": true,
                         "key": "editor"
                     },
@@ -26,6 +26,7 @@
     ],
     
     "javascript":  [
-        "~/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/controller.js"
+        "~/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/controller.js",
+        "~/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/prevalues.controller.js"
     ]
 }
