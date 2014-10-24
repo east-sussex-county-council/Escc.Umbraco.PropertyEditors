@@ -218,10 +218,10 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                             if (!value) return true;
 
                             // Remove links including link text, remove tags, anything left is an error
-                            value = value.replace(/<a [^>]*>.*?<\/a>/, '');
-                            value = value.replace(/<[^>]*>/, '');
+                            value = value.replace(/<a [^>]*>.*?<\/a>/gi, '');
+                            value = value.replace(/<\/?[^>]*>/gi, '');
                             value = value.trim();
-                            return (value == true);
+                            return (value == false);
                         }
                     });
                 }
@@ -433,6 +433,89 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                                 }
                             }
                             index++;
+                        }
+
+                        return value;
+                    });
+                }
+
+                // Automatically format links found in a placeholder as two lists of links, with classes applied to allow display as columns.
+                if (formattersToApply.indexOf('twoListsOfLinks') != -1) {
+                    ngModel.$formatters.push(function(value) {
+
+                        // Where an entire placeholder should be an unordered list of links, this prevents the author from having to remember.
+                        function shouldBeUnorderedList(html, listClass) {
+                            var match, matches = [];
+                            var regex = /(<a [^>]*>)(.*?)<\/a>/gi;
+                            while (match = regex.exec(html)) {
+                                matches.push({ tag: match[1], text: match[2] });
+                            }
+                            
+                            if (matches.length == 0) return ''; // we want a list of links so, no links, no list
+
+                            var list = "<ul";
+                            if (listClass) list += ' class="' + listClass + '"';
+                            list += ">\n";
+
+                            for(var i = 0; i < matches.length;i++)
+                            {
+                                list += ("<li>" + matches[i].tag + matches[i].text[0].toUpperCase() + matches[i].text.substr(1) + "</a></li>\n");
+                            }
+
+                            list += "</ul>";
+                            return list;
+                    
+                        }
+
+
+                        var firstListPos = value.indexOf("<ul");
+                        var lastListPos = value.lastIndexOf("<ul");
+                        if (firstListPos > -1 && firstListPos != lastListPos)
+                        {
+                            // multiple lists, find the join
+                            var firstListEnds = value.indexOf("</ul>");
+                            if (firstListEnds == -1) return value; // screwed-up HTML, give up before we make a mess!
+                            var firstHalf = value.substr(0, firstListEnds);
+                            var secondHalf = value.substr(firstListEnds);
+
+                            // grab links, style as lists
+                            firstHalf = shouldBeUnorderedList(firstHalf, "first");
+                            secondHalf = shouldBeUnorderedList(secondHalf, "second");
+
+                            // and put back together
+                            value = firstHalf + secondHalf;
+                        }
+                        else
+                        {
+                            // oherwise grab links and distribute into two lists
+                            var listHtml = shouldBeUnorderedList(value, '');
+
+                            var listItems = [];
+                            var re = /(<li[^>]*>.*?<\/li>)/g;
+                            var match;
+                            while (match = re.exec(listHtml)) {
+                                listItems.push(match[1]);
+                            }
+                            
+                            if (listItems.length > 1)
+                            {
+                                var itemsPerList = Math.floor(listItems.length / 2);
+                                var extraItem = (listItems.length % 2);
+                                var i;
+
+                                var lists = '<ul class="first">';
+                                for (i = 0; i < (itemsPerList + extraItem); i++) lists += listItems[i];
+                                lists += '</ul><ul class="second">';
+                                for (i = (itemsPerList + extraItem); i < ((itemsPerList * 2) + extraItem); i++) lists += listItems[i];
+                                lists += "</ul>";
+
+                                value = lists;
+                            }
+                            else
+                            {
+                                // unless there's only one link, then leave it in its one list
+                                value = listHtml;
+                            }
                         }
 
                         return value;

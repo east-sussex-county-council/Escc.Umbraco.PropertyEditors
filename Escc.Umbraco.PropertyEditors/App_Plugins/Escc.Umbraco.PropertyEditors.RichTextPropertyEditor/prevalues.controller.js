@@ -54,7 +54,8 @@
             { "name" : "enDashes", "displayName" : "Replace hyphens with en-dashes" },
             { "name" : "ellipsis", "displayName" : "Convert ... to ellipsis" },
             { "name" : "startHeadingsWithCapital", "displayName" : "Always start headings with a captial letter" },
-            { "name" : "startContentWithCapital", "displayName" : "Always start the content with a capital letter" }
+            { "name" : "startContentWithCapital", "displayName": "Always start the content with a capital letter" },
+            { "name" : "twoListsOfLinks", "displayName" : "Format content as two lists of links" }
         ];
 
         $scope.selected = function (cmd, alias, lookup) {
