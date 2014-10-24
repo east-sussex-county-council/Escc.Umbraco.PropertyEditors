@@ -16,6 +16,12 @@
         if (!$scope.model.value.toolbar) {
             $scope.model.value.toolbar = [];
         }
+        if (!$scope.model.value.validators) {
+            $scope.model.value.validators = [];
+        }
+        if (!$scope.model.value.formatters) {
+            $scope.model.value.formatters = [];
+        }
 
         tinyMceService.configuration().then(function (config) {
             $scope.tinyMceConfig = config;
@@ -25,6 +31,30 @@
         stylesheetResource.getAll().then(function (stylesheets) {
             $scope.stylesheets = stylesheets;
         });
+
+        $scope.validators = [
+            { "name": "clickHere", "displayName": "Do not link to 'click here'" },
+            { "name": "linkToHere", "displayName": "Do not link to 'here'" },
+            { "name": "visit", "displayName": "Do not start links with 'Visit'" },
+            { "name": "more", "displayName": "Do not link to 'more'" },
+            { "name": "allCaps", "displayName": "Do not type in CAPITAL LETTERS" },
+            { "name": "urlAsLinkText", "displayName": "Do not use a URL as link text" }
+        ];
+
+        $scope.formatters = [
+            { "name" : "nbsp", "displayName" : "Convert non-breaking spaces to spaces" },
+            { "name" : "removeEmptyBlock", "displayName" : "Remove empty block elements" },
+            { "name" : "removeTarget", "displayName" : "Remove link targets" },
+            { "name" : "removeIfMissingAttribute", "displayName" : "Remove tags with missing required attributes" },
+            { "name" : "autocorrect", "displayName" : "Auto-correct common strings" },
+            { "name" : "fullstopsOutsideLinks", "displayName" : "Move fullstops outside links" },
+            { "name" : "spacesOutsideLinks", "displayName" : "Move trailing spaces outside links" },
+            { "name" : "smartQuotes", "displayName" : "Use smart quotes" },
+            { "name" : "enDashes", "displayName" : "Replace hyphens with en-dashes" },
+            { "name" : "ellipsis", "displayName" : "Convert ... to ellipsis" },
+            { "name" : "startHeadingsWithCapital", "displayName" : "Always start headings with a captial letter" },
+            { "name" : "startContentWithCapital", "displayName" : "Always start the content with a capital letter" }
+        ];
 
         $scope.selected = function (cmd, alias, lookup) {
             if (lookup && angular.isArray(lookup)) {
@@ -44,14 +74,14 @@
             }
         };
 
-        $scope.selectStylesheet = function (css) {
+        $scope.selectOption = function (option, collection) {
 
-            var index = $scope.model.value.stylesheets.indexOf(css.name);
+            var index = collection.indexOf(option.name);
 
-            if (css.selected && index === -1) {
-                $scope.model.value.stylesheets.push(css.name);
+            if (option.selected && index === -1) {
+                collection.push(option.name);
             } else if (index >= 0) {
-                $scope.model.value.stylesheets.splice(index, 1);
+                collection.splice(index, 1);
             }
         };
 

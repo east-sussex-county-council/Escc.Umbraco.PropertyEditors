@@ -2,24 +2,52 @@
 
     <umb-control-group label="Toolbar" hide-label="false">
         <div ng-repeat="cmd in tinyMceConfig.commands">
-            <input type="checkbox"
-                   ng-checked="selected(cmd, cmd.frontEndCommand, model.value.toolbar)"
-                   ng-model="cmd.selected"
-                   ng-change="selectCommand(cmd)" />
+            <label>
+                <input type="checkbox"
+                       ng-checked="selected(cmd, cmd.frontEndCommand, model.value.toolbar)"
+                       ng-model="cmd.selected"
+                       ng-change="selectCommand(cmd)" />
 
-            <img ng-src="{{cmd.icon}}" />
+                <img ng-src="{{cmd.icon}}" />
 
-            {{cmd.frontEndCommand}}
+                {{cmd.frontEndCommand}}
+            </label>
         </div>
     </umb-control-group>
 
     <umb-control-group label="Stylesheets" hide-label="0">
         <div ng-repeat="css in stylesheets">
-            <input type="checkbox"
-                   ng-checked="selected(css, css.name, model.value.stylesheets)"
-                   ng-model="css.selected"
-                   ng-change="selectStylesheet(css)" />
-            {{css.name}}
+            <label>
+                <input type="checkbox"
+                       ng-checked="selected(css, css.name, model.value.stylesheets)"
+                       ng-model="css.selected"
+                       ng-change="selectOption(css, model.value.stylesheets)" />
+                {{css.name}}
+            </label>
+        </div>
+    </umb-control-group>
+    
+    <umb-control-group label="Validators" hide-label="0">
+        <div ng-repeat="validator in validators">
+            <label>
+                <input type="checkbox"
+                       ng-checked="selected(validator, validator.name, model.value.validators)"
+                       ng-model="validator.selected"
+                       ng-change="selectOption(validator, model.value.validators)" />
+                {{validator.displayName}}
+            </label>
+        </div>
+    </umb-control-group>
+    
+    <umb-control-group label="Formatters" hide-label="0">
+        <div ng-repeat="formatter in formatters">
+            <label>
+                <input type="checkbox"
+                       ng-checked="selected(formatter, formatter.name, model.value.formatters)"
+                       ng-model="formatter.selected"
+                       ng-change="selectOption(formatter, model.value.formatters)" />
+                {{formatter.displayName}}
+            </label>
         </div>
     </umb-control-group>
 
