@@ -9,7 +9,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
     // Load custom CSS for this editor
     assetsService.loadCss("/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/styles.css");
 })
-.directive("validateRichText", function () {
+.directive("validateRichText", function() {
     return {
         restrict: 'A',
         link: function(scope, elem, attrs) {
@@ -24,15 +24,15 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
             // Validation using the $parsers pipeline wasn't working with tinyMCE, but can be done by watching for 
             // changes to $scope.model.value, which is updated from tinyMCE by the inherited controller. 
             // Remove the watch when done to avoid a memory leak.
-            var stopWatching = scope.$watch('model.value', function () {
-                angular.forEach(validators, function (validator) {
+            var stopWatching = scope.$watch('model.value', function() {
+                angular.forEach(validators, function(validator) {
                     var valid = validator.validate(scope.model.value);
                     $("." + validator.id, elem).html(validator.message || validator.template);
                     scope.propertyForm.$setValidity(validator.id, valid);
                 });
             });
 
-            scope.$on('$destroy', function () {
+            scope.$on('$destroy', function() {
                 stopWatching();
             });
 
@@ -60,7 +60,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                     validatorsToReturn.push({
                         id: 'clickHere',
                         template: "You linked to '{0}'. Links must make sense on their own, out of context. Linking to 'click here' doesn't do that. You should normally use the main heading of the destination page as your link text.",
-                        validate: function (value) {
+                        validate: function(value) {
                             if (!value) return true;
 
                             var regex, match;
@@ -213,7 +213,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                 if (validatorsToApply.indexOf('onlyLinks') != -1) {
                     validatorsToReturn.push({
                         id: 'onlyLinks',
-                        template: 'This field should only contain links.',
+                        template: 'This field should contain only links.',
                         validate: function(value) {
                             if (!value) return true;
 
@@ -225,6 +225,34 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                         }
                     });
                 }
+
+
+                if (validatorsToApply.indexOf('noDocuments') != -1) {
+                    validatorsToReturn.push({
+                        id: 'noDocuments',
+                        template: "You linked to a document, '{0}'. Do not link to documents from here.",
+                        validate: function(value) {
+                            if (!value) return true;
+
+                            var match, matches = [],
+                                mediaLibraryUrl = "/media/[0-9]+[^\"]+",
+                                documentUrl = "[A-Za-z0-9_\/:\.?&=#%-]+\.(rtf|xls|xlsx|pdf|doc|docx|dot|dotx|ppt|pps|pptx|ppsx|mp3|wma)";
+
+                            var regex = new RegExp("<a [^>]*href=\"(" + mediaLibraryUrl + "|" + documentUrl + ")\"[^>]*>(" + anythingExceptEndAnchor + ")</a>", "gi");
+                            while (match = regex.exec(value)) {
+                                matches.push({ url: match[1], text: match[3] });
+                            }
+
+                            if (matches.length === 0) {
+                                return true;
+                            } else {
+                                this.message = this.template.replace('{0}', matches[0].text);
+                                return false;
+                            }
+                        }
+                    });
+                };
+                
 
                 return validatorsToReturn;
             }

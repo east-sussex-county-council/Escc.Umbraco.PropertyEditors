@@ -39,7 +39,8 @@
             { "name": "more", "displayName": "Do not link to 'more'" },
             { "name": "allCaps", "displayName": "Do not type in CAPITAL LETTERS" },
             { "name": "urlAsLinkText", "displayName": "Do not use a URL as link text" },
-            { "name": "onlyLinks", "displayName": "Only contains links"}
+            { "name": "onlyLinks", "displayName": "Only contains links" },
+            { "name": "noDocuments", "displayName": "Do not link to documents" }
         ];
 
         $scope.formatters = [
