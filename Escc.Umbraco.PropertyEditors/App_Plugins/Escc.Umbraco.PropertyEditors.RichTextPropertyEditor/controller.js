@@ -56,7 +56,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                 var anythingExceptEndAnchor = "((?!</a>).)*";
                 var validatorsToReturn = [];
 
-                if (validatorsToApply.indexOf('clickHere') != -1) {
+                if (findValidator('clickHere', validatorsToApply)) {
                     validatorsToReturn.push({
                         id: 'clickHere',
                         template: "You linked to '{0}'. Links must make sense on their own, out of context. Linking to 'click here' doesn't do that. You should normally use the main heading of the destination page as your link text.",
@@ -78,7 +78,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                     });
                 }
 
-                if (validatorsToApply.indexOf('linkToHere') != -1) {
+                if (findValidator('linkToHere', validatorsToApply)) {
                     validatorsToReturn.push({
                         id: 'linkToHere',
                         template: "You linked to '{0}'. Links must make sense on their own, out of context. Linking to 'here' doesn't do that. You should normally use the main heading of the destination page as your link text.",
@@ -98,7 +98,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                     });
                 }
 
-                if (validatorsToApply.indexOf('visit') != -1) {
+                if (findValidator('visit', validatorsToApply)) {
                     validatorsToReturn.push({
                         id: 'visit',
                         template: "You linked to '{0}'. You don't need to start links with 'visit'. You should normally use the main heading of the destination page as your link text.",
@@ -121,7 +121,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                     });
                 }
 
-                if (validatorsToApply.indexOf('more') != -1) {
+                if (findValidator('more', validatorsToApply)) {
                     validatorsToReturn.push({
                         id: 'more',
                         template: "You linked to '{0}'. Links must make sense on their own, out of context. Linking to 'More' doesn't do that. Link to 'More about [your subject]' instead.",
@@ -139,7 +139,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                     });
                 }
 
-                if (validatorsToApply.indexOf('allCaps') != -1) {
+                if (findValidator('allCaps', validatorsToApply)) {
                     validatorsToReturn.push({
                         id: 'allCaps',
                         template: "You typed '{0}'. Don't write in uppercase as it's seen as <span style=\"text-transform:uppercase\">shouting</span> and, for partially sighted users, it's read out one letter at a time.",
@@ -191,7 +191,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                     });
                 }
 
-                if (validatorsToApply.indexOf('urlAsLinkText') != -1) {
+                if (findValidator('urlAsLinkText', validatorsToApply)) {
                     validatorsToReturn.push({
                         id: 'urlAsLinkText',
                         template: "You linked to '{0}'. Don't use the address of a web page as your link text. You should normally use the main heading of the destination page as your link text.",
@@ -210,7 +210,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                 }
 
                 /// Checks that the HTML placeholder does not contain any text outside links
-                if (validatorsToApply.indexOf('onlyLinks') != -1) {
+                if (findValidator('onlyLinks', validatorsToApply)) {
                     validatorsToReturn.push({
                         id: 'onlyLinks',
                         template: 'This field should contain only links.',
@@ -227,7 +227,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                 }
 
 
-                if (validatorsToApply.indexOf('noDocuments') != -1) {
+                if (findValidator('noDocuments', validatorsToApply)) {
                     validatorsToReturn.push({
                         id: 'noDocuments',
                         template: "You linked to a document, '{0}'. Do not link to documents from here.",
@@ -252,9 +252,44 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                         }
                     });
                 };
+
+
+                var validator = findValidator('maximumWords', validatorsToApply);
+                if (validator) {
+                    validatorsToReturn.push({
+                        id: "maximumWords",
+                        template: "Use " + validator.max + " words or fewer in this section.",
+                        validate: function(value) {
+                            if (!value) return true;
+                          
+                            // strip tags
+                            value = value.replace(/<\/?[^>]*>/gi, '');
+                          
+                            // get rid of unusual white space
+                            value = value.replace(/\s+/gi, " ");
+
+                            // split into words
+                            var words = value.trim().split(' ');
+
+                            // validate word count
+                            return (words.length <= validator.max);
+                        }
+                    });
+                }
                 
 
                 return validatorsToReturn;
+            }
+
+            function findValidator(alias, validatorsToApply) {
+
+                for (var i = 0; i < validatorsToApply.length; i++) {
+                    if (alias == validatorsToApply[i].name) {
+                        return validatorsToApply[i];
+                    }
+                }
+
+                return null;
             }
         }
     }

@@ -31,10 +31,14 @@
         <div ng-repeat="validator in validators">
             <label>
                 <input type="checkbox"
-                       ng-checked="selected(validator, validator.name, model.value.validators)"
+                       ng-checked="selectedByName(validator, validator.name, model.value.validators)"
                        ng-model="validator.selected"
-                       ng-change="selectOption(validator, model.value.validators)" />
+                       ng-change="selectOptionByName(validator, model.value.validators)" 
+                       style="vertical-align: baseline" />
                 {{validator.displayName}}
+                <input type="number" ng-show="validator.hasMaxValue" ng-model="validator.max"
+                       ng-change="updateValidatorOption('max', validator, model.value.validators)"
+                       style="vertical-align: middle; width: 4em;" />
             </label>
         </div>
     </umb-control-group>
