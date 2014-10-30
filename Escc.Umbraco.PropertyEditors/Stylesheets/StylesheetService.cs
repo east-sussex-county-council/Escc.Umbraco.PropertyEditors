@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using ExCSS;
+using umbraco.BusinessLogic;
 using umbraco.cms.businesslogic.web;
 using StyleSheet = umbraco.cms.businesslogic.web.StyleSheet;
 
@@ -43,6 +44,7 @@ namespace Escc.Umbraco.PropertyEditors.Stylesheets
                 Selector = rule.Selector.ToString(),
                 Declarations = rule.Declarations.ToString()
             })
+            .Where(property => !String.IsNullOrEmpty(property.DisplayName))
             .ToList();
         }
 
@@ -53,11 +55,10 @@ namespace Escc.Umbraco.PropertyEditors.Stylesheets
         /// <returns></returns>
         private static string ParseDisplayNameFromCssRule(StyleRule rule)
         {
-            // If no display name specified, default is to use the selector
-            var displayName = rule.Selector.ToString();
+            var displayName = String.Empty;
 
             // Look for a display name in a custom CSS declaration
-            var umbracoPropertyName = rule.Declarations.First(d => d.Name == "-umbraco-stylesheet-property");
+            var umbracoPropertyName = rule.Declarations.SingleOrDefault(d => d.Name == "-umbraco-stylesheet-property");
             if (umbracoPropertyName != null)
             {
                 // The declaration value will be surrounded by quotes, so remove them.
@@ -79,9 +80,7 @@ namespace Escc.Umbraco.PropertyEditors.Stylesheets
         /// <param name="umbracoStylesheetProperties">The umbraco stylesheet properties.</param>
         public static void CreateOrUpdateUmbracoStylesheet(string stylesheetName, IEnumerable<UmbracoStylesheetProperty> umbracoStylesheetProperties)
         {
-            // Obsolete method of getting a user needed for the old API. There's no new API for adding stylesheets to the Umbraco database in v 7.1.4, 
-            // only for working with CSS files on disk using the FileService.
-            var user = umbraco.BusinessLogic.User.GetCurrent();
+            var user = GetUserToUpdateStylesheets();
 
             // Gets the stylesheet from Umbraco if it already exists, or create it. Need to check for existence or Umbraco will 
             // create multiple stylesheets with the same name. This is just about the database record, not the CSS file on disk.
@@ -99,6 +98,20 @@ namespace Escc.Umbraco.PropertyEditors.Stylesheets
                 property.Alias = propertyToSave.Selector;
                 property.value = propertyToSave.Declarations;
             }
+        }
+
+        /// <summary>
+        /// Gets the user to update stylesheets.
+        /// </summary>
+        /// <returns>An admin user</returns>
+        /// <remarks>Obsolete method of getting a user needed for using the old stylesheet API. 
+        /// There's no new API for adding stylesheets to the Umbraco database in v 7.1.4, only for working with CSS files on disk using the FileService.
+        /// Can't use User.CurrentUser() because there isn't one available when this runs during application startup.
+        /// </remarks>
+        private static User GetUserToUpdateStylesheets()
+        {
+            var users = User.getAll();
+            return users.SingleOrDefault(user => user.UserType.Alias == "admin");
         }
 
 
