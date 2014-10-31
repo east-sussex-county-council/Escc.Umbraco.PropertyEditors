@@ -509,7 +509,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                         // Where an entire placeholder should be an unordered list of links, this prevents the author from having to remember.
                         function shouldBeUnorderedList(html, listClass) {
                             var match, matches = [];
-                            var regex = /(<a [^>]*>)(.*?)<\/a>/gi;
+                            var regex = /(<a [^>]*>)(.+?)<\/a>/gi;
                             while (match = regex.exec(html)) {
                                 matches.push({ tag: match[1], text: match[2] });
                             }
@@ -531,55 +531,36 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                         }
 
 
-                        var firstListPos = value.indexOf("<ul");
-                        var lastListPos = value.lastIndexOf("<ul");
-                        if (firstListPos > -1 && firstListPos != lastListPos)
+                        // grab links and distribute into two lists
+                        var listHtml = shouldBeUnorderedList(value, '');
+
+                        var listItems = [];
+                        var re = /(<li[^>]*>.*?<\/li>)/g;
+                        var match;
+                        while (match = re.exec(listHtml)) {
+                            listItems.push(match[1]);
+                        }
+                            
+                        if (listItems.length > 1)
                         {
-                            // multiple lists, find the join
-                            var firstListEnds = value.indexOf("</ul>");
-                            if (firstListEnds == -1) return value; // screwed-up HTML, give up before we make a mess!
-                            var firstHalf = value.substr(0, firstListEnds);
-                            var secondHalf = value.substr(firstListEnds);
+                            var itemsPerList = Math.floor(listItems.length / 2);
+                            var extraItem = (listItems.length % 2);
+                            var i;
 
-                            // grab links, style as lists
-                            firstHalf = shouldBeUnorderedList(firstHalf, "first");
-                            secondHalf = shouldBeUnorderedList(secondHalf, "second");
+                            var lists = '<ul class="first">';
+                            for (i = 0; i < (itemsPerList + extraItem); i++) lists += listItems[i];
+                            lists += '</ul><ul class="second">';
+                            for (i = (itemsPerList + extraItem); i < ((itemsPerList * 2) + extraItem); i++) lists += listItems[i];
+                            lists += "</ul>";
 
-                            // and put back together
-                            value = firstHalf + secondHalf;
+                            value = lists;
                         }
                         else
                         {
-                            // oherwise grab links and distribute into two lists
-                            var listHtml = shouldBeUnorderedList(value, '');
-
-                            var listItems = [];
-                            var re = /(<li[^>]*>.*?<\/li>)/g;
-                            var match;
-                            while (match = re.exec(listHtml)) {
-                                listItems.push(match[1]);
-                            }
-                            
-                            if (listItems.length > 1)
-                            {
-                                var itemsPerList = Math.floor(listItems.length / 2);
-                                var extraItem = (listItems.length % 2);
-                                var i;
-
-                                var lists = '<ul class="first">';
-                                for (i = 0; i < (itemsPerList + extraItem); i++) lists += listItems[i];
-                                lists += '</ul><ul class="second">';
-                                for (i = (itemsPerList + extraItem); i < ((itemsPerList * 2) + extraItem); i++) lists += listItems[i];
-                                lists += "</ul>";
-
-                                value = lists;
-                            }
-                            else
-                            {
-                                // unless there's only one link, then leave it in its one list
-                                value = listHtml;
-                            }
+                            // unless there's only one link, then leave it in its one list
+                            value = listHtml;
                         }
+                        
 
                         return value;
                     });
