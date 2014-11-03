@@ -69,7 +69,7 @@
             { "name" : "fullstopsOutsideLinks", "displayName" : "Move fullstops outside links" },
             { "name" : "spacesOutsideLinks", "displayName" : "Move trailing spaces outside links" },
             { "name" : "smartQuotes", "displayName" : "Use smart quotes" },
-            { "name" : "enDashes", "displayName" : "Replace hyphens with en-dashes" },
+            { "name" : "enDashes", "displayName" : "Convert hyphens to en-dashes" },
             { "name" : "ellipsis", "displayName" : "Convert ... to ellipsis" },
             { "name" : "startHeadingsWithCapital", "displayName" : "Always start headings with a captial letter" },
             { "name" : "startContentWithCapital", "displayName": "Always start the content with a capital letter" },
