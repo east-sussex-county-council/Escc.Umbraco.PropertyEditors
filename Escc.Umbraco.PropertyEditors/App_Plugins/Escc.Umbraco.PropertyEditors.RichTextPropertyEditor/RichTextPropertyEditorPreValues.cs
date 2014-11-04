@@ -31,10 +31,10 @@ namespace Escc.Umbraco.PropertyEditors.App_Plugins.Escc.Umbraco.PropertyEditors.
     [DataContract]
     public class Dimensions
     {
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public int height { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public int width { get; set; }
     }
 
@@ -47,7 +47,7 @@ namespace Escc.Umbraco.PropertyEditors.App_Plugins.Escc.Umbraco.PropertyEditors.
         [DataMember]
         public string name { get; set; }
 
-        [DataMember]
+        [DataMember(EmitDefaultValue = false)]
         public int max { get; set; }
     }
 }
