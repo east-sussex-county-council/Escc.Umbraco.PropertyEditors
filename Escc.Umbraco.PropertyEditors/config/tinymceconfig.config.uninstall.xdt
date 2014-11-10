@@ -1,0 +1,6 @@
+﻿<?xml version="1.0"?>
+<tinymceConfig xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <commands>
+    <command xdt:Transform="Remove" xdt:Locator="Condition([./umbracoAlias='Blockquote'])" />
+  </commands>
+</tinymceConfig>

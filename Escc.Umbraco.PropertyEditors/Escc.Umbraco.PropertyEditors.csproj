@@ -250,9 +250,12 @@
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.BooleanPropertyEditor\controller.js" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\package.manifest" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\prevalues.controller.js" />
+    <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\quote.png" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\rte.prevalues.html" />
     <Content Include="packages.config" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.BooleanPropertyEditor\package.manifest" />
+    <Content Include="config\tinymceconfig.config.uninstall.xdt" />
+    <None Include="config\tinymceconfig.config.install.xdt" />
     <None Include="Web.example.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -268,8 +271,11 @@
     <None Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\RichTextFormatters.cs" />
     <Compile Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\RichTextPropertyEditorPreValues.cs" />
-    <Compile Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\RichTextPropertyEditorSettings.cs" />
+    <Compile Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\RichTextValidators.cs" />
+    <Compile Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\TinyMceButtons.cs" />
+    <Compile Include="PropertyEditorAliases.cs" />
     <Compile Include="Stylesheets\UmbracoStylesheetProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RichTextValueConverter\ElibraryLinkFormatter.cs" />

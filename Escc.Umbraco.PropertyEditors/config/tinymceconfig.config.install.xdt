@@ -1,0 +1,11 @@
+﻿<?xml version="1.0"?>
+<tinymceConfig xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <commands>
+    <command xdt:Transform="Insert">
+      <umbracoAlias>Blockquote</umbracoAlias>
+      <icon>../App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/quote.png</icon>
+      <tinyMceCommand value="" userInterface="false" frontendCommand="blockquote">blockquote</tinyMceCommand>
+      <priority>45</priority>
+    </command>
+  </commands>
+</tinymceConfig>
