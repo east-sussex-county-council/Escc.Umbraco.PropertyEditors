@@ -5,6 +5,22 @@ angular.module("umbraco").directive("validateUrl", function () {
         link: function (scope, ele, attrs, ngModel) {
             if (!ngModel) return;
 
+            ele.blur(function (e) {
+                // format URL for user to see
+                var that = $(this);
+                that.val(formatUrlToSave(that.val()));
+            });
+
+            function formatUrlToSave(value) {
+
+                // If the protocol is missing but it looks like a domain, be helpful and assume http
+                if (value && (value.indexOf("www.") === 0 || value.match(/^[a-z0-9]{2,}[.][a-z0-9]{2,}[a-z0-9.]*$/))) {
+                    value = "http://" + value;
+                }
+
+                return value;
+            }
+
             ngModel.$parsers.unshift(
                 function (viewValue) {
 
@@ -50,21 +66,23 @@ angular.module("umbraco").directive("validateUrl", function () {
 
                     if (viewValue) {
 
-                        var urlToValidate = viewValue;
-
-                        // If the protocol is missing but it looks like a domain, be helpful and assume http
-                        if (viewValue.indexOf("www.") === 0 || viewValue.match(/^[a-z0-9]{2,}[.][a-z0-9]{2,}[a-z0-9.]*$/)) {
-                            viewValue = "http://" + viewValue;
-                            urlToValidate = viewValue;
-                        }
+                        viewValue = formatUrlToSave(viewValue);
 
                         // Allow root-relative URLs by prepending a domain for validation, but don't save the domain
-                        if (viewValue.indexOf("/") === 0) {
-                            urlToValidate = "http://example.org";
+                        var urlToValidate = viewValue;
+                        if (scope.model.config.rootRelative === "1") {
+                            if (viewValue.indexOf("/") === 0) {
+                                urlToValidate = "http://example.org";
+                            }
                         }
 
                         // Now check against the URL regex
                         valid = (urlToValidate.match(re_weburl));
+
+                        // If an additional pattern is specified as a prevalue, check that too
+                        if (scope.model.config.pattern) {
+                            valid = valid && urlToValidate.match(scope.model.config.pattern);
+                        }
                     }
 
                     ngModel.$setValidity('invalid', valid);

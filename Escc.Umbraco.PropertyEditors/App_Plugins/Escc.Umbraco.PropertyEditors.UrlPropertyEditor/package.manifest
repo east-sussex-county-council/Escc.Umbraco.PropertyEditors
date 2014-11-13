@@ -5,6 +5,21 @@
             name: "URL",
             editor: {
                 view: "~/App_Plugins/Escc.Umbraco.PropertyEditors.UrlPropertyEditor/editor.html"
+            },
+            "prevalues": {
+                "fields":  [
+                    {
+                        "label": "Allow relative URLs starting with /",
+                        "view": "boolean",
+                        "key": "rootRelative"
+                    },
+                    {
+                        "label": "Regular expression",
+						"description": "In addition to standard validation. For example, check for a specific domain.",
+                        "view": "textstring",
+                        "key": "pattern"
+                    }
+                ]
             }
         }
     ]
