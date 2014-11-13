@@ -1,0 +1,15 @@
+{   
+    propertyEditors: [      
+        {
+            alias: "Escc.Umbraco.PropertyEditors.TwitterScriptPropertyEditor",
+            name: "Twitter widget script",
+            editor: {
+                view: "~/App_Plugins/Escc.Umbraco.PropertyEditors.TwitterScriptPropertyEditor/editor.html"
+            }
+        }
+    ]
+    ,
+    javascript: [
+        '~/App_Plugins/Escc.Umbraco.PropertyEditors.TwitterScriptPropertyEditor/validate.js'
+    ]
+}

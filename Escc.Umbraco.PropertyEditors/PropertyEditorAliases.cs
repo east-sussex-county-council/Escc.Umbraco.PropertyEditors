@@ -10,5 +10,6 @@ namespace Escc.Umbraco.PropertyEditors
         public const string RichTextPropertyEditor = "Escc.Umbraco.PropertyEditors.RichTextPropertyEditor";
         public const string EmailAddressPropertyEditor = "Escc.Umbraco.PropertyEditors.EmailAddressPropertyEditor";
         public const string PhonePropertyEditor = "Escc.Umbraco.PropertyEditors.PhonePropertyEditor";
+        public const string TwitterScriptPropertyEditor = "Escc.Umbraco.PropertyEditors.TwitterScriptPropertyEditor";
     }
 }
