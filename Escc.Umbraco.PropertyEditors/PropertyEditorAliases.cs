@@ -9,5 +9,6 @@ namespace Escc.Umbraco.PropertyEditors
         public const string BooleanPropertyEditor = "Escc.Umbraco.PropertyEditors.BooleanPropertyEditor";
         public const string RichTextPropertyEditor = "Escc.Umbraco.PropertyEditors.RichTextPropertyEditor";
         public const string EmailAddressPropertyEditor = "Escc.Umbraco.PropertyEditors.EmailAddressPropertyEditor";
+        public const string PhonePropertyEditor = "Escc.Umbraco.PropertyEditors.PhonePropertyEditor";
     }
 }

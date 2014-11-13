@@ -1,0 +1,15 @@
+{   
+    propertyEditors: [      
+        {
+            alias: "Escc.Umbraco.PropertyEditors.PhonePropertyEditor",
+            name: "Phone number",
+            editor: {
+                view: "~/App_Plugins/Escc.Umbraco.PropertyEditors.PhonePropertyEditor/editor.html"
+            }
+        }
+    ]
+    ,
+    javascript: [
+        '~/App_Plugins/Escc.Umbraco.PropertyEditors.PhonePropertyEditor/PhonePropertyEditor.js'
+    ]
+}
