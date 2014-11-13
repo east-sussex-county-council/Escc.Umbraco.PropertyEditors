@@ -1,0 +1,15 @@
+{   
+    propertyEditors: [      
+        {
+            alias: "Escc.Umbraco.PropertyEditors.UrlPropertyEditor",
+            name: "URL",
+            editor: {
+                view: "~/App_Plugins/Escc.Umbraco.PropertyEditors.UrlPropertyEditor/editor.html"
+            }
+        }
+    ]
+    ,
+    javascript: [
+        '~/App_Plugins/Escc.Umbraco.PropertyEditors.UrlPropertyEditor/validate.js'
+    ]
+}
