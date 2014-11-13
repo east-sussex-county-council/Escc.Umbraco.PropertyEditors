@@ -1,0 +1,15 @@
+{   
+    propertyEditors: [      
+        {
+            alias: "Escc.Umbraco.PropertyEditors.EmailAddressPropertyEditor",
+            name: "Email address (ESCC)",
+            editor: {
+                view: "~/App_Plugins/Escc.Umbraco.PropertyEditors.EmailAddressPropertyEditor/editor.html"
+            }
+        }
+    ]
+    ,
+    javascript: [
+        '~/App_Plugins/Escc.Umbraco.PropertyEditors.EmailAddressPropertyEditor/validate.js'
+    ]
+}
