@@ -1,4 +1,5 @@
 <div>
     <p ng-show="propertyForm.textbox.$error.invalid" class="alert alert-error">Please type a valid URL</p>
-    <input type="url" name="textbox" ng-model="model.value" validate-url="true" class="umb-editor umb-textstring textstring" />
+    <!-- Don't use HTML5 url field type as it only allows absolute URLs -->
+    <input type="text" name="textbox" ng-model="model.value" validate-url="true" class="umb-editor umb-textstring textstring" />
 </div>
