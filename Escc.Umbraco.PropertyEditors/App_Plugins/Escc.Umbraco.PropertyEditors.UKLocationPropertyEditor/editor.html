@@ -1,0 +1,64 @@
+<div ng-controller="Escc.Umbraco.PropertyEditors.UKLocationController" ng-model="model.value" class="uk-location">
+    <p ng-show="postcodeInvalid" class="alert alert-error">Please type a valid postcode</p>
+    <p ng-show="latitudeInvalid" class="alert alert-error">Please type a valid latitude</p>
+    <p ng-show="longitudeInvalid" class="alert alert-error">Please type a valid longitude</p>
+    <p ng-show="eastingInvalid" class="alert alert-error">Please type a valid easting</p>
+    <p ng-show="northingInvalid" class="alert alert-error">Please type a valid northing</p>
+
+    <label for="{{model.alias}}_saon">
+        SAON:
+    </label>
+    <input type="text" name="saon" id="{{model.alias}}_saon" ng-model="model.value.saon" class="umb-editor umb-textstring textstring" maxlength="100" />
+
+    <label for="{{model.alias}}_paon">
+        PAON:
+    </label>
+    <input type="text" name="paon" id="{{model.alias}}_paon" ng-model=" model.value.paon" class="umb-editor umb-textstring textstring" maxlength="100" />
+
+    <label for="{{model.alias}}_streetName">
+        Street name:
+    </label>
+    <input type="text" name="streetName" id="{{model.alias}}_streetName" ng-model="model.value.streetName" class="umb-editor umb-textstring textstring" maxlength="100" />
+
+    <label for="{{model.alias}}_locality">
+        Locality:
+    </label>
+    <input type="text" name="locality" id="{{model.alias}}_locality" ng-model="model.value.locality" class="umb-editor umb-textstring textstring" maxlength="35" />
+
+    <label for="{{model.alias}}_town">
+        Town:
+    </label>
+    <input type="text" name="town" id="{{model.alias}}_town" ng-model="model.value.town" class="umb-editor umb-textstring textstring" maxlength="30" />
+
+    <label for="{{model.alias}}_administrativeArea">
+        County:
+    </label>
+    <input type="text" name="administrativeArea" id="{{model.alias}}_administrativeArea" ng-model="model.value.administrativeArea" class="umb-editor umb-textstring textstring" maxlength="30" />
+
+    <label for="{{model.alias}}_postcode">
+        Postcode:
+    </label>
+    <input type="text" name="postcode" id="{{model.alias}}_postcode" ng-model="model.value.postcode" class="umb-editor umb-textstring textstring" maxlength="8" ng-change="validatePostcode()" />
+
+    <label for="{{model.alias}}_lat" class="group">
+        Latitude:
+    </label>
+    <input type="text" name="lat" id="{{model.alias}}_lat" ng-model="model.value.lat" class="umb-editor umb-textstring textstring group" ng-change="validateLatitude()" />
+
+    <label for="{{model.alias}}_lon">
+        Longitude:
+    </label>
+    <input type="text" name="lon" id="{{model.alias}}_lon" ng-model="model.value.lon" class="umb-editor umb-textstring textstring" ng-change="validateLongitude()" />
+
+    <label for="{{model.alias}}_easting" class="group">
+        Easting:
+    </label>
+    <input type="text" name="easting" id="{{model.alias}}_easting" ng-model="model.value.easting" class="umb-editor umb-textstring textstring group" ng-change="validateEasting()" />
+
+    <label for="{{model.alias}}_northing">
+        Northing:
+    </label>
+    <input type="text" name="northing" id="{{model.alias}}_northing" ng-model="model.value.northing" class="umb-editor umb-textstring textstring" ng-change="validateNorthing()" />
+
+    <p>Use <a href="http://www.gridreferencefinder.com/" target="_new">UK Grid Reference Finder</a> to look up coordinates.</p>
+</div>
