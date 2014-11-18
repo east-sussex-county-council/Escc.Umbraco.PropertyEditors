@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using eastsussexgovuk.webservices.TextXhtml.HouseStyle;
 
-namespace Escc.Umbraco.PropertyEditors.RichTextValueConverter
+namespace Escc.Umbraco.PropertyEditors.RichTextPropertyValueConverter
 {
     public class EncodeEmailAddressFormatter : IHtmlFormatter
     {

@@ -1,4 +1,4 @@
-﻿using Escc.Umbraco.PropertyEditors.RichTextValueConverter;
+﻿using Escc.Umbraco.PropertyEditors.RichTextPropertyValueConverter;
 using NUnit.Framework;
 
 namespace Escc.Umbraco.PropertyEditors.Tests

@@ -5,7 +5,7 @@ using System.Web;
 using eastsussexgovuk.webservices.TextXhtml.HouseStyle;
 using EsccWebTeam.HouseStyle;
 
-namespace Escc.Umbraco.PropertyEditors.RichTextValueConverter
+namespace Escc.Umbraco.PropertyEditors.RichTextPropertyValueConverter
 {
     /// <summary>
     /// Ensure email address links consistently point to our form rather than requiring the user has an email client.

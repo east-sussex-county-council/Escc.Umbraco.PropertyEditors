@@ -1,6 +1,6 @@
 ﻿using Escc.Elibrary;
 
-namespace Escc.Umbraco.PropertyEditors.RichTextValueConverter
+namespace Escc.Umbraco.PropertyEditors.RichTextPropertyValueConverter
 {
     public class ElibraryLinkFormatter : IHtmlFormatter
     {

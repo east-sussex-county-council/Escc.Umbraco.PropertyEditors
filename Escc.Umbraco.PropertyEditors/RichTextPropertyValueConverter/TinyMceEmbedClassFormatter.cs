@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Escc.Umbraco.PropertyEditors.RichTextValueConverter
+namespace Escc.Umbraco.PropertyEditors.RichTextPropertyValueConverter
 {
     /// <summary>
     /// Umbraco's configuration of TinyMCE means that, when a class is applied to a link, it is actually applied to a span element surrounding the link.

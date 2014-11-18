@@ -1,5 +1,5 @@
 ﻿
-namespace Escc.Umbraco.PropertyEditors.RichTextValueConverter
+namespace Escc.Umbraco.PropertyEditors.RichTextPropertyValueConverter
 {
     /// <summary>
     /// A formatter which has a chance to modify an HTML string
