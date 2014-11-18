@@ -6,57 +6,57 @@
     <p ng-show="northingInvalid" class="alert alert-error">Please type a valid northing</p>
 
     <label for="{{model.alias}}_saon">
-        SAON:
+        Part of building (eg room, flat, floor)
     </label>
     <input type="text" name="saon" id="{{model.alias}}_saon" ng-model="model.value.saon" class="umb-editor umb-textstring textstring" maxlength="100" />
 
     <label for="{{model.alias}}_paon">
-        PAON:
+        Building name or number
     </label>
     <input type="text" name="paon" id="{{model.alias}}_paon" ng-model=" model.value.paon" class="umb-editor umb-textstring textstring" maxlength="100" />
 
     <label for="{{model.alias}}_streetName">
-        Street name:
+        Street name
     </label>
     <input type="text" name="streetName" id="{{model.alias}}_streetName" ng-model="model.value.streetName" class="umb-editor umb-textstring textstring" maxlength="100" />
 
     <label for="{{model.alias}}_locality">
-        Locality:
+        Village or part of town
     </label>
     <input type="text" name="locality" id="{{model.alias}}_locality" ng-model="model.value.locality" class="umb-editor umb-textstring textstring" maxlength="35" />
 
     <label for="{{model.alias}}_town">
-        Town:
+        Town
     </label>
     <input type="text" name="town" id="{{model.alias}}_town" ng-model="model.value.town" class="umb-editor umb-textstring textstring" maxlength="30" />
 
     <label for="{{model.alias}}_administrativeArea">
-        County:
+        County
     </label>
     <input type="text" name="administrativeArea" id="{{model.alias}}_administrativeArea" ng-model="model.value.administrativeArea" class="umb-editor umb-textstring textstring" maxlength="30" />
 
     <label for="{{model.alias}}_postcode">
-        Postcode:
+        Postcode
     </label>
     <input type="text" name="postcode" id="{{model.alias}}_postcode" ng-model="model.value.postcode" class="umb-editor umb-textstring textstring" maxlength="8" ng-change="validatePostcode()" />
 
     <label for="{{model.alias}}_lat" class="group">
-        Latitude:
+        Latitude
     </label>
     <input type="text" name="lat" id="{{model.alias}}_lat" ng-model="model.value.lat" class="umb-editor umb-textstring textstring group" ng-change="validateLatitude()" />
 
     <label for="{{model.alias}}_lon">
-        Longitude:
+        Longitude
     </label>
     <input type="text" name="lon" id="{{model.alias}}_lon" ng-model="model.value.lon" class="umb-editor umb-textstring textstring" ng-change="validateLongitude()" />
 
     <label for="{{model.alias}}_easting" class="group">
-        Easting:
+        Easting
     </label>
     <input type="text" name="easting" id="{{model.alias}}_easting" ng-model="model.value.easting" class="umb-editor umb-textstring textstring group" ng-change="validateEasting()" />
 
     <label for="{{model.alias}}_northing">
-        Northing:
+        Northing
     </label>
     <input type="text" name="northing" id="{{model.alias}}_northing" ng-model="model.value.northing" class="umb-editor umb-textstring textstring" ng-change="validateNorthing()" />
 

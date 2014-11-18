@@ -1,7 +1,7 @@
 ﻿.uk-location { overflow: hidden; }
 .uk-location label {clear: left; float: left; width: 33%;margin: 2px 0;padding: 0; }
 .uk-location input { float: left; min-width: 0;width: 50%;margin: 2px 0;}
-.uk-location [name=locality], .uk-location [name=town], .uk-location [name=administrativeArea] { max-width: 15em; }
+.uk-location [name=locality], .uk-location [name=town], .uk-location [name=administrativeArea], .uk-location [name=lat], .uk-location [name=lon] { max-width: 15em; }
 .uk-location [name=postcode], .uk-location [name=easting], .uk-location [name=northing] { max-width: 5em; }
 .uk-location .group { margin-top: 15px; }
 
