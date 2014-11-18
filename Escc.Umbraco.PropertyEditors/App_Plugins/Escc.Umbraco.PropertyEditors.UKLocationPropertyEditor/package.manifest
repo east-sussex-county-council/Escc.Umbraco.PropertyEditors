@@ -1,7 +1,7 @@
 {   
     propertyEditors: [      
         {
-            alias: "Escc.Umbraco.PropertyEditors.UKLocationPropertyEditor",
+            alias: "Escc.Umbraco.PropertyEditors.UkLocationPropertyEditor",
             name: "UK location",
             editor: {
                 view: "~/App_Plugins/Escc.Umbraco.PropertyEditors.UKLocationPropertyEditor/editor.html"

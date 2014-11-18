@@ -72,6 +72,9 @@
       <HintPath>..\packages\xmlrpcnet.2.5.0\lib\net20\CookComputing.XmlRpcV2.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Escc.AddressAndPersonalDetails">
+      <HintPath>..\packages\Escc.AddressAndPersonalDetails.1.0.0\lib\Escc.AddressAndPersonalDetails.dll</HintPath>
+    </Reference>
     <Reference Include="Examine">
       <HintPath>..\packages\UmbracoCms.Core.7.1.4\lib\Examine.dll</HintPath>
       <Private>True</Private>
@@ -248,9 +251,9 @@
   <ItemGroup>
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.BooleanPropertyEditor\boolean.html" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.BooleanPropertyEditor\controller.js" />
-    <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UKLocationPropertyEditor\editor.html" />
-    <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UKLocationPropertyEditor\UKLocationPropertyEditor.css" />
-    <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UKLocationPropertyEditor\UKLocationPropertyEditor.js" />
+    <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UkLocationPropertyEditor\editor.html" />
+    <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UkLocationPropertyEditor\UKLocationPropertyEditor.css" />
+    <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UkLocationPropertyEditor\UKLocationPropertyEditor.js" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UrlPropertyEditor\editor.html" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UrlPropertyEditor\validate.js" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.TwitterScriptPropertyEditor\editor.html" />
@@ -270,7 +273,7 @@
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.PhonePropertyEditor\package.manifest" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.TwitterScriptPropertyEditor\package.manifest" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UrlPropertyEditor\package.manifest" />
-    <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UKLocationPropertyEditor\package.manifest" />
+    <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UkLocationPropertyEditor\package.manifest" />
     <None Include="config\tinymceconfig.config.install.xdt" />
     <None Include="Web.example.config" />
     <None Include="Web.Debug.config">
@@ -294,13 +297,15 @@
     <Compile Include="PropertyEditorAliases.cs" />
     <Compile Include="Stylesheets\UmbracoStylesheetProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RichTextValueConverter\ElibraryLinkFormatter.cs" />
-    <Compile Include="RichTextValueConverter\EncodeEmailAddressFormatter.cs" />
-    <Compile Include="RichTextValueConverter\IHtmlFormatter.cs" />
-    <Compile Include="RichTextValueConverter\RichTextPropertyValueConverter.cs" />
-    <Compile Include="RichTextValueConverter\TinyMceEmbedClassFormatter.cs" />
-    <Compile Include="RichTextValueConverter\UseFormForEmailLinksFormatter.cs" />
+    <Compile Include="RichTextPropertyValueConverter\ElibraryLinkFormatter.cs" />
+    <Compile Include="RichTextPropertyValueConverter\EncodeEmailAddressFormatter.cs" />
+    <Compile Include="RichTextPropertyValueConverter\IHtmlFormatter.cs" />
+    <Compile Include="RichTextPropertyValueConverter\RichTextPropertyValueConverter.cs" />
+    <Compile Include="RichTextPropertyValueConverter\TinyMceEmbedClassFormatter.cs" />
+    <Compile Include="RichTextPropertyValueConverter\UseFormForEmailLinksFormatter.cs" />
     <Compile Include="Stylesheets\StylesheetService.cs" />
+    <Compile Include="UkLocationPropertyValueConverter\UkLocationPropertyValueConverter.cs" />
+    <Compile Include="UkLocationPropertyValueConverter\UkLocationValue.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Escc.Elibrary\Escc.Elibrary.csproj">
