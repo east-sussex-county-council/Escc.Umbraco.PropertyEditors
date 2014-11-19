@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Globalization;
+using System.IO;
 using System.Runtime.Serialization.Json;
 using Escc.AddressAndPersonalDetails;
 using Umbraco.Core.Models.PublishedContent;
@@ -29,7 +31,7 @@ namespace Escc.Umbraco.PropertyEditors.UKLocationPropertyValueConverter
                 var js = new DataContractJsonSerializer(typeof(UkLocationValue));
                 var value = (UkLocationValue)js.ReadObject(stream);
 
-                return new AddressInfo
+                var data = new AddressInfo
                 {
                     BS7666Address = new BS7666Address()
                     {
@@ -43,13 +45,47 @@ namespace Escc.Umbraco.PropertyEditors.UKLocationPropertyValueConverter
                     },
 
                     GeoCoordinate = new GeoCoordinate()
-                    {
-                        Latitude = value.Latitude,
-                        Longitude = value.Longitude,
-                        Easting = value.Easting,
-                        Northing = value.Northing
-                    }
                 };
+
+                ParseCoordinates(value, data);
+
+                return data;
+            }
+        }
+
+        private static void ParseCoordinates(UkLocationValue value, AddressInfo data)
+        {
+            if (String.IsNullOrEmpty(value.Latitude))
+            {
+                double result;
+                if (Double.TryParse(value.Latitude, NumberStyles.Any, CultureInfo.InvariantCulture, out result))
+                {
+                    data.GeoCoordinate.Latitude = result;
+                }
+            }
+            if (String.IsNullOrEmpty(value.Longitude))
+            {
+                double result;
+                if (Double.TryParse(value.Longitude, NumberStyles.Any, CultureInfo.InvariantCulture, out result))
+                {
+                    data.GeoCoordinate.Longitude = result;
+                }
+            }
+            if (String.IsNullOrEmpty(value.Easting))
+            {
+                int result;
+                if (Int32.TryParse(value.Easting, NumberStyles.Any, CultureInfo.InvariantCulture, out result))
+                {
+                    data.GeoCoordinate.Easting = result;
+                }
+            }
+            if (String.IsNullOrEmpty(value.Northing))
+            {
+                int result;
+                if (Int32.TryParse(value.Northing, NumberStyles.Any, CultureInfo.InvariantCulture, out result))
+                {
+                    data.GeoCoordinate.Northing = result;
+                }
             }
         }
 

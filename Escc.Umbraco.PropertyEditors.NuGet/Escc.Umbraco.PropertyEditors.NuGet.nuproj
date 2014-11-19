@@ -17,19 +17,16 @@
     <Compile Include="Escc.Umbraco.PropertyEditors.NuGet.nuspec" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="build" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="build\Escc.Umbraco.PropertyEditors.targets">
-      <SubType>Content</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Escc.Umbraco.PropertyEditors\Escc.Umbraco.PropertyEditors.csproj">
       <Name>Escc.Umbraco.PropertyEditors</Name>
       <Project>{4d01c402-9863-498b-96b8-4fbe69643995}</Project>
       <Private>True</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Escc.Umbraco.PropertyEditors.targets">
+      <SubType>Content</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\NuBuild\v1\NuBuild.targets" />
 </Project>

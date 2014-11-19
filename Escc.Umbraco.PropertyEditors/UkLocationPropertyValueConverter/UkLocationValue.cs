@@ -27,15 +27,15 @@ namespace Escc.Umbraco.PropertyEditors.UKLocationPropertyValueConverter
         public string Postcode { get; set; }
 
         [DataMember(Name = "lat")]
-        public double Latitude { get; set; }
+        public string Latitude { get; set; }
 
         [DataMember(Name = "lon")]
-        public double Longitude { get; set; }
+        public string Longitude { get; set; }
 
         [DataMember(Name = "easting")]
-        public int Easting { get; set; }
+        public string Easting { get; set; }
 
         [DataMember(Name = "northing")]
-        public int Northing { get; set; }
+        public string Northing { get; set; }
     }
 }
