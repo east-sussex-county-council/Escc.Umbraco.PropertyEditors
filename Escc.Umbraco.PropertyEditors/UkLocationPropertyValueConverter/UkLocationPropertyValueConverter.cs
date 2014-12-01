@@ -55,7 +55,7 @@ namespace Escc.Umbraco.PropertyEditors.UKLocationPropertyValueConverter
 
         private static void ParseCoordinates(UkLocationValue value, AddressInfo data)
         {
-            if (String.IsNullOrEmpty(value.Latitude))
+            if (!String.IsNullOrEmpty(value.Latitude))
             {
                 double result;
                 if (Double.TryParse(value.Latitude, NumberStyles.Any, CultureInfo.InvariantCulture, out result))
@@ -63,7 +63,7 @@ namespace Escc.Umbraco.PropertyEditors.UKLocationPropertyValueConverter
                     data.GeoCoordinate.Latitude = result;
                 }
             }
-            if (String.IsNullOrEmpty(value.Longitude))
+            if (!String.IsNullOrEmpty(value.Longitude))
             {
                 double result;
                 if (Double.TryParse(value.Longitude, NumberStyles.Any, CultureInfo.InvariantCulture, out result))
@@ -71,7 +71,7 @@ namespace Escc.Umbraco.PropertyEditors.UKLocationPropertyValueConverter
                     data.GeoCoordinate.Longitude = result;
                 }
             }
-            if (String.IsNullOrEmpty(value.Easting))
+            if (!String.IsNullOrEmpty(value.Easting))
             {
                 int result;
                 if (Int32.TryParse(value.Easting, NumberStyles.Any, CultureInfo.InvariantCulture, out result))
@@ -79,7 +79,7 @@ namespace Escc.Umbraco.PropertyEditors.UKLocationPropertyValueConverter
                     data.GeoCoordinate.Easting = result;
                 }
             }
-            if (String.IsNullOrEmpty(value.Northing))
+            if (!String.IsNullOrEmpty(value.Northing))
             {
                 int result;
                 if (Int32.TryParse(value.Northing, NumberStyles.Any, CultureInfo.InvariantCulture, out result))
