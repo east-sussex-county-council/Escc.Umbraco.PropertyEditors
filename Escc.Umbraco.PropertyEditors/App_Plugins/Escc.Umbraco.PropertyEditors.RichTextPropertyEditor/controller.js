@@ -332,10 +332,11 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
             // Use ngModel.$formatters.push(formatter_function) to register a formatter.
             function createFormatters(formattersToApply) {
 
-                // Remove any non-breaking spaces
+                // Normalise spacing in HTML. This also removes non-breaking spaces.
                 if (formattersToApply.indexOf('nbsp') != -1) {
                     ngModel.$formatters.push(function(value) {
-                        return value.replace('&nbsp;', ' ');
+                        value = value.replace(/\s+/gi, ' ');
+                        return value;
                     });
                 }
 

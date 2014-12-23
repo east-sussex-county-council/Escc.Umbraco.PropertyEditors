@@ -61,7 +61,7 @@
 
         // Load the possible formatters to select from
         $scope.formatters = [
-            { "name" : "nbsp", "displayName" : "Convert non-breaking spaces to spaces" },
+            { "name" : "nbsp", "displayName" : "Normalise HTML spaces" },
             { "name" : "removeEmptyBlock", "displayName" : "Remove empty block elements" },
             { "name" : "removeTarget", "displayName" : "Remove link targets" },
             { "name" : "removeIfMissingAttribute", "displayName" : "Remove tags with missing required attributes" },
