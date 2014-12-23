@@ -394,7 +394,35 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                 if (formattersToApply.indexOf('smartQuotes') != -1) {
                     ngModel.$formatters.push(function(value) {
 
-                        /* Logic taken from smartquotes.js, adapted to work when saving a string rather than on page load to avoid adding JavaScript to page size.
+                        // HTML entity decoding by mattcasey on http://stackoverflow.com/questions/5796718/html-entity-decode
+                        var decodeEntities = (function () {
+                            // Remove HTML Entities
+                            var element = document.createElement('div');
+
+                            function decode_HTML_entities(str) {
+
+                                if (str && typeof str === 'string') {
+
+                                    // Escape HTML before decoding for HTML Entities
+                                    str = escape(str).replace(/%26/g, '&').replace(/%23/g, '#').replace(/%3B/g, ';');
+
+                                    element.innerHTML = str;
+                                    if (element.innerText) {
+                                        str = element.innerText;
+                                        element.innerText = '';
+                                    } else {
+                                        // Firefox support
+                                        str = element.textContent;
+                                        element.textContent = '';
+                                    }
+                                }
+                                return unescape(str);
+                            }
+                            return decode_HTML_entities;
+                        })();
+
+
+                     /* Logic taken from smartquotes.js, adapted to work when saving a string rather than on page load to avoid adding JavaScript to page size.
 
                      * smartquotes.js v0.1.4
                      * http://github.com/kellym/smartquotesjs
@@ -433,7 +461,8 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                             }
                         }
 
-                        return root.body.innerHTML;
+                        // Decode entities so that the format is the same as what was receieved by this method
+                        return decodeEntities(root.body.innerHTML);
                     });
                 }
 
