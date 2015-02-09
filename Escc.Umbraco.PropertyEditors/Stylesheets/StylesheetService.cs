@@ -12,30 +12,32 @@ namespace Escc.Umbraco.PropertyEditors.Stylesheets
     /// <summary>
     /// Update stylesheets in the Umbraco database based on the contents of CSS files
     /// </summary>
-    public class StylesheetService
+    public class StylesheetService : IStylesheetService
     {
         /// <summary>
         /// Reads the text from a CSS file.
         /// </summary>
-        /// <param name="filePathWithinApplication">The file path within application, eg /css/file.css</param>
+        /// <param name="filePathWithinApplication">The file path within the application, eg /css/file.css</param>
         /// <returns></returns>
         /// <exception cref="FileNotFoundException"></exception>
-        public static string ReadCssFromFile(string filePathWithinApplication)
+        public string ReadCssFromFile(string filePathWithinApplication)
         {
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filePathWithinApplication);
             return File.ReadAllText(path);
         }
 
         /// <summary>
-        /// Parses CSS text into a set of properties which can be saved to Umbraco. 
+        /// Parses CSS text into a set of properties which can be saved to Umbraco.
         /// Uses a custom -umbraco-stylesheet-property declaration in a CSS rule to specify a display name for the Umbraco property.
         /// </summary>
-        /// <param name="css"></param>
-        /// <example>.example { -umbraco-stylesheet-property: 'Example property'; color: red; }</example>
+        /// <param name="css">The CSS.</param>
+        /// <param name="parser">An ExCSS parser.</param>
         /// <returns></returns>
-        public static IEnumerable<UmbracoStylesheetProperty> ParseCss(string css)
+        /// <example>.example { -umbraco-stylesheet-property: 'Example property'; color: red; }</example>
+        public IEnumerable<UmbracoStylesheetProperty> ParseCss(string css, Parser parser)
         {
-            var parser = new Parser();
+            if (parser == null) throw new ArgumentNullException("parser");
+
             var stylesheet = parser.Parse(css);
 
             return stylesheet.StyleRules.Select(rule => new UmbracoStylesheetProperty
@@ -78,7 +80,7 @@ namespace Escc.Umbraco.PropertyEditors.Stylesheets
         /// </summary>
         /// <param name="stylesheetName">The name of the stylesheet. Expected to be the same as the filename without the .css extension.</param>
         /// <param name="umbracoStylesheetProperties">The umbraco stylesheet properties.</param>
-        public static void CreateOrUpdateUmbracoStylesheet(string stylesheetName, IEnumerable<UmbracoStylesheetProperty> umbracoStylesheetProperties)
+        public void CreateOrUpdateUmbracoStylesheet(string stylesheetName, IEnumerable<UmbracoStylesheetProperty> umbracoStylesheetProperties)
         {
             var user = GetUserToUpdateStylesheets();
 

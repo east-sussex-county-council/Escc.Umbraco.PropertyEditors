@@ -295,6 +295,7 @@
     <Compile Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\RichTextValidators.cs" />
     <Compile Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\TinyMceButtons.cs" />
     <Compile Include="PropertyEditorAliases.cs" />
+    <Compile Include="Stylesheets\IStylesheetService.cs" />
     <Compile Include="Stylesheets\UmbracoStylesheetProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RichTextPropertyValueConverter\ElibraryLinkFormatter.cs" />
