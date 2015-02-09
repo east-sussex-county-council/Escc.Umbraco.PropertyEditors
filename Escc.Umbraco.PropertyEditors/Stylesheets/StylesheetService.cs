@@ -111,7 +111,7 @@ namespace Escc.Umbraco.PropertyEditors.Stylesheets
         private static User GetUserToUpdateStylesheets()
         {
             var users = User.getAll();
-            return users.SingleOrDefault(user => user.UserType.Alias == "admin");
+            return users.FirstOrDefault(user => user.UserType.Alias == "admin");
         }
 
 
