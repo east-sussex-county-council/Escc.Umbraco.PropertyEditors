@@ -317,7 +317,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
             //
             // Note: this is done on save rather than on change to avoid moving the cursor unexpectedly in TinyMCE.
             scope.$on("formSubmitting", function (ev, args) {
-                var instance = tinymce.get(scope.model.alias + "_rte");
+                var instance = tinymce.get(scope.textAreaHtmlId);
                 var html = instance.getContent();
 
                 angular.forEach(ngModel.$formatters, function (format) {
