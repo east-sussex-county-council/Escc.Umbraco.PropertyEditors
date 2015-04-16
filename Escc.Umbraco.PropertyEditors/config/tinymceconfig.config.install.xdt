@@ -8,4 +8,18 @@
       <priority>45</priority>
     </command>
   </commands>
+  <validElements xdt:Transform="Remove" />
+  <validElements xdt:Transform="Insert">
+    <![CDATA[+a[id|rel|rev|charset|hreflang|dir|lang|tabindex|accesskey|type|name|href|class],-strong/-b[class],-em/-i[class],
+-strike[class],-p[id|dir|class],-ol[class|reversed|start|type],-ul[class],-li[class],br[class],
+-sub[class],-sup[class],-blockquote[dir|class],-table[width|height|class|dir|id|lang],
+-tr[id|lang|dir|class|rowspan|width|height],tbody[id|class],
+thead[id|class],tfoot[id|class],#td[id|lang|dir|class|colspan|rowspan|width|height|scope],
+-th[id|lang|dir|class|colspan|rowspan|width|height|scope],caption[id|lang|dir|class],
+-span[class],-h1[id|dir|class],-h2[id|dir|class],
+-h3[id|dir|class],-h4[id|dir|class],-h5[id|dir|class],-h6[id|dir|class],hr[class],
+dd[id|class|dir|lang],dl[id|class|dir|lang],dt[id|class|dir|lang]]]>
+  </validElements>
+  <invalidElements xdt:Transform="Remove" />
+  <invalidElements xdt:Transform="Insert">font,div</invalidElements>
 </tinymceConfig>
