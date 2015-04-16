@@ -8,6 +8,7 @@ namespace Escc.Umbraco.PropertyEditors.App_Plugins.Escc.Umbraco.PropertyEditors.
     {
         public const string ConvertNonBreakingSpacesToSpaces = "nbsp";
         public const string RemoveEmptyBlockElements = "removeEmptyBlock";
+        public const string RemoveEmptyLinks = "removeEmptyLinks";
         public const string RemoveLinkTargets = "removeTarget";
         public const string RemoveTagsWithMissingRequiredAttributes = "removeIfMissingAttribute";
         public const string AutoCorrectCommonStrings = "autocorrect";

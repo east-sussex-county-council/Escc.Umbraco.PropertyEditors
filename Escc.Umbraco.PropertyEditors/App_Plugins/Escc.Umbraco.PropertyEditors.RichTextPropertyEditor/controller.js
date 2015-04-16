@@ -340,6 +340,16 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                     });
                 }
 
+                // Remove empty links, which contain nothing white space, optionally surrounded by a span element
+                if (formattersToApply.indexOf('removeEmptyLinks')) {
+                    ngModel.$formatters.push(function(value) {
+                        if (value) {
+                            value = value.replace(new RegExp("<a(| [^>]*)>(\s*|\s*<span[^>]*>\s*<\/span>\s*)<\/a>", "gi"), "");
+                        }
+                        return value;
+                    });
+                }
+
                 // Remove any block elements with no content
                 if (formattersToApply.indexOf('removeEmptyBlock') != -1) {
                     ngModel.$formatters.push(function(value) {
