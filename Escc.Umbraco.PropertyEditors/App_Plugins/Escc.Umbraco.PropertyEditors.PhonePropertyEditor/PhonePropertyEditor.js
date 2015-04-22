@@ -41,8 +41,8 @@ angular.module("umbraco").directive("validatePhoneNumber", function () {
                     // Format number for saving
                     viewValue = formatPhoneNumber(viewValue);
 
-                    // Test for valid phone number
-                    var valid = viewValue.match(/^[0-9]{3,5} [0-9]{6,}$/);
+                    // Test for empty string or valid phone number
+                    var valid = viewValue.match(/^(|[0-9]{3,5} [0-9]{6,})$/);
                     ngModel.$setValidity('phoneInvalid', valid);
 
                     return viewValue;
