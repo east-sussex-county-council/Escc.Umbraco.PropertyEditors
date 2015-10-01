@@ -351,10 +351,11 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                 }
 
                 // Remove any block elements with no content
+                // Allow empty TD and TH
                 if (formattersToApply.indexOf('removeEmptyBlock') != -1) {
                     ngModel.$formatters.push(function(value) {
                         if (value) {
-                            var blockElements = ["address", "blockquote", "dl", "p", "h1", "h2", "h3", "h4", "h5", "h6", "ol", "table", "ul", "dd", "dt", "li", "tbody", "td", "tfoot", "th", "thead", "tr"];
+                            var blockElements = ["address", "blockquote", "dl", "p", "h1", "h2", "h3", "h4", "h5", "h6", "ol", "table", "ul", "dd", "dt", "li", "tbody", "tfoot", "thead", "tr"];
                             angular.forEach(blockElements, function(element) {
                                 value = value.replace(new RegExp("<" + element + "[^>]*>(\\s*|&nbsp;)</" + element + ">", "gi"), "");
                             });
