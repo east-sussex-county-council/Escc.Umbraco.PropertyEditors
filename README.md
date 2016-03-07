@@ -15,7 +15,7 @@ This property editor extends the built-in rich text editor using several methods
 
 * A custom pre-value editor extends the built-in options, allowing validators and formatters to be enabled or disabled for each data type that uses this property editor. The code in `controller.js` looks for these pre-values to see what to run. The pre-values are stored in the Umbraco database as JSON, and the `RichTextPropertyEditorPreValues` class is designed to serialise to the correct JSON format.
 
-* A PropertyValueConverter runs a further series of formatters when the property is displayed.
+* A PropertyValueConverter automatically discovers all implementations of `IRichTextHtmlFormatter` in the current scope, and runs them when the property is displayed. Two formatters are included by default, which tidy up TinyMCE's output when applying the `.embed` class to links, and encode email addresses as HTML entities. Your can add your own formatters by implementing `IRichTextHtmlFormatter` and they will be picked up automatically.
 
 * A `StylesheetService` allows stylesheets to be read from a CSS file and added to Umbraco, where they can be used in the rich text editor to style the text in edit view. If you add a custom `-umbraco-stylesheet-property` declaration in a CSS rule, it will make the rule available in the TinyMCE style selector dropdown.
  
