@@ -1,15 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escc.Umbraco.PropertyEditors.Tests", "Escc.Umbraco.PropertyEditors.Tests\Escc.Umbraco.PropertyEditors.Tests.csproj", "{A4F48148-CC6D-42E7-B30A-BF226AC193FC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EsccWebTeam.HouseStyle", "..\Escc.HouseStyle\EsccWebTeam.HouseStyle.csproj", "{1C429378-DBF2-4AF7-88AC-C059AA163682}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EsccWebTeam.Data.Web", "..\Escc.Data.Web\EsccWebTeam.Data.Web.csproj", "{9C56D3DD-4952-4A1B-9AD6-907A1142872F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escc.Elibrary", "..\Escc.Elibrary\Escc.Elibrary.csproj", "{3D2240E0-D165-4C52-A97B-730542975D3A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escc.Umbraco.PropertyEditors", "Escc.Umbraco.PropertyEditors\Escc.Umbraco.PropertyEditors.csproj", "{4D01C402-9863-498B-96B8-4FBE69643995}"
 EndProject
@@ -32,18 +26,6 @@ Global
 		{A4F48148-CC6D-42E7-B30A-BF226AC193FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4F48148-CC6D-42E7-B30A-BF226AC193FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4F48148-CC6D-42E7-B30A-BF226AC193FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1C429378-DBF2-4AF7-88AC-C059AA163682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C429378-DBF2-4AF7-88AC-C059AA163682}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C429378-DBF2-4AF7-88AC-C059AA163682}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C429378-DBF2-4AF7-88AC-C059AA163682}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9C56D3DD-4952-4A1B-9AD6-907A1142872F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C56D3DD-4952-4A1B-9AD6-907A1142872F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C56D3DD-4952-4A1B-9AD6-907A1142872F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C56D3DD-4952-4A1B-9AD6-907A1142872F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3D2240E0-D165-4C52-A97B-730542975D3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D2240E0-D165-4C52-A97B-730542975D3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D2240E0-D165-4C52-A97B-730542975D3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D2240E0-D165-4C52-A97B-730542975D3A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4D01C402-9863-498B-96B8-4FBE69643995}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4D01C402-9863-498B-96B8-4FBE69643995}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D01C402-9863-498B-96B8-4FBE69643995}.Release|Any CPU.ActiveCfg = Release|Any CPU

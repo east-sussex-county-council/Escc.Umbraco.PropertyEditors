@@ -1,4 +1,9 @@
-﻿using Umbraco.Core.Models.PublishedContent;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Exceptionless;
+using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.PropertyEditors;
 using Umbraco.Web.Templates;
 
@@ -30,11 +35,23 @@ namespace Escc.Umbraco.PropertyEditors.RichTextPropertyValueConverter
             sourceString = TemplateUtilities.ParseInternalLinks(sourceString);
             sourceString = TemplateUtilities.ResolveUrlsFromTextString(sourceString);
 
-            var formatters = new IHtmlFormatter[] { new TinyMceEmbedClassFormatter(), new UseFormForEmailLinksFormatter(), new EncodeEmailAddressFormatter(), new ElibraryLinkFormatter() };
-
-            foreach (var formatter in formatters)
+            try
             {
-                sourceString = formatter.Format(sourceString);
+                // Find, load and run any instances of IRichTextHtmlFormatter in the current scope
+                var lookupType = typeof(IRichTextHtmlFormatter);
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(assembly => !assembly.FullName.StartsWith("System."));
+                IEnumerable<Type> formatters = assemblies.SelectMany(assembly => assembly.GetTypes()).Where(t => lookupType.IsAssignableFrom(t) && !t.IsInterface);
+
+                foreach (var formatterType in formatters)
+                {
+                    var formatter = (IRichTextHtmlFormatter)Activator.CreateInstance(formatterType);
+                    sourceString = formatter.Format(sourceString);
+                }
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                // If some assembly we load is referencing missing code, report the error and allow the page to load
+                ex.ToExceptionless().Submit();
             }
 
             return sourceString;

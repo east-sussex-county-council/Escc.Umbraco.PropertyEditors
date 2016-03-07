@@ -1,17 +1,16 @@
-﻿using Escc.Elibrary;
-
+﻿
 namespace Escc.Umbraco.PropertyEditors.RichTextPropertyValueConverter
 {
-    public class ElibraryLinkFormatter : IHtmlFormatter
+    /// <summary>
+    /// A formatter which has a chance to modify an HTML string
+    /// </summary>
+    public interface IRichTextHtmlFormatter
     {
         /// <summary>
         /// Formats the specified HTML.
         /// </summary>
         /// <param name="html">The HTML.</param>
         /// <returns></returns>
-        public string Format(string html)
-        {
-            return ElibraryLinkProxy.ParseAndRewriteElibraryLinks(html);
-        }
+        string Format(string html);
     }
 }

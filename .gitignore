@@ -34,3 +34,4 @@ _ReSharper*/
 [Ss]cripts*/
 packages/
 *.GhostDoc.xml
+.vs

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using eastsussexgovuk.webservices.TextXhtml.HouseStyle;
+using Escc.Html;
 
 namespace Escc.Umbraco.PropertyEditors.RichTextPropertyValueConverter
 {
-    public class EncodeEmailAddressFormatter : IHtmlFormatter
+    public class EncodeEmailAddressFormatter : IRichTextHtmlFormatter
     {
         /// <summary>
         /// Formats the specified HTML.
@@ -13,10 +13,11 @@ namespace Escc.Umbraco.PropertyEditors.RichTextPropertyValueConverter
         /// <returns></returns>
         public string Format(string html)
         {
+            var encoder = new HtmlEncoder();
             return String.IsNullOrEmpty(html)
                 ? html
                 : Regex.Replace(html, @"([A-Za-z0-9-.]+@[A-Za-z0-9-.]+\.[A-Za-z]+)",
-                    match => UriFormatter.ConvertEmailToEntities(match.Groups[1].Value));
+                    match => encoder.HtmlEncode(match.Groups[1].Value));
         }
     }
 }
