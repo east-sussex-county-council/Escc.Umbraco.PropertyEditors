@@ -39,7 +39,7 @@ namespace Escc.Umbraco.PropertyEditors.RichTextPropertyValueConverter
             {
                 // Find, load and run any instances of IRichTextHtmlFormatter in the current scope
                 var lookupType = typeof(IRichTextHtmlFormatter);
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(assembly => !assembly.FullName.StartsWith("System."));
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(assembly => assembly.FullName.StartsWith("Escc."));
                 IEnumerable<Type> formatters = assemblies.SelectMany(assembly => assembly.GetTypes()).Where(t => lookupType.IsAssignableFrom(t) && !t.IsInterface);
 
                 foreach (var formatterType in formatters)
@@ -51,7 +51,10 @@ namespace Escc.Umbraco.PropertyEditors.RichTextPropertyValueConverter
             catch (ReflectionTypeLoadException ex)
             {
                 // If some assembly we load is referencing missing code, report the error and allow the page to load
-                ex.ToExceptionless().Submit();
+                foreach (var nestedException in ex.LoaderExceptions)
+                {
+                    nestedException.ToExceptionless().Submit();
+                }
             }
 
             return sourceString;
