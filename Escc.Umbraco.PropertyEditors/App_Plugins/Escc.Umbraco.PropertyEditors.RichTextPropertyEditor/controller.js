@@ -66,7 +66,7 @@ angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPrope
                             var regex, match;
 
                             // Check for links involving the phrase 'click here'
-                            regex = new RegExp("<a [^>]*>(" + anythingExceptEndAnchor + "\\bclick\\s+here\\b" + anythingExceptEndAnchor + ")</a>", "i");
+                            regex = new RegExp("<a [^>]*>(" + anythingExceptEndAnchor + "\\bclick(ing)?\\s+here\\b" + anythingExceptEndAnchor + ")</a>", "i");
                             match = regex.exec(value);
 
                             // If invalid, show a custom message which includes the invalid link text
