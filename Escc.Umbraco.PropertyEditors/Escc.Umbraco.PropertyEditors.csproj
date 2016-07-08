@@ -78,7 +78,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Escc.Html, Version=1.0.0.0, Culture=neutral, PublicKeyToken=06fad7304560ae6f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Escc.Html.1.1.0\lib\Escc.Html.dll</HintPath>
+      <HintPath>..\packages\Escc.Html.2.0.0\lib\Escc.Html.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Examine, Version=0.1.65.0, Culture=neutral, processorArchitecture=MSIL">

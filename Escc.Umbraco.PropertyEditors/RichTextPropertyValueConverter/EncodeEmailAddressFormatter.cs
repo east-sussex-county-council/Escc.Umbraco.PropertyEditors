@@ -17,7 +17,7 @@ namespace Escc.Umbraco.PropertyEditors.RichTextPropertyValueConverter
             return String.IsNullOrEmpty(html)
                 ? html
                 : Regex.Replace(html, @"([A-Za-z0-9-.]+@[A-Za-z0-9-.]+\.[A-Za-z]+)",
-                    match => encoder.HtmlEncode(match.Groups[1].Value));
+                    match => encoder.HtmlEncodeEveryCharacter(match.Groups[1].Value));
         }
     }
 }
