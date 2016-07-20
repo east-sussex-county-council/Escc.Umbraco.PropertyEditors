@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using Escc.Umbraco.PropertyEditors;
-using Escc.Umbraco.PropertyEditors.DataTypes;
 using Umbraco.Core.Models;
 
-namespace Escc.EastSussexGovUK.UmbracoDocumentTypes.DataTypes
+namespace Escc.Umbraco.PropertyEditors.DataTypes
 {
     /// <summary>
     /// A multi-node tree picker data type for Umbraco

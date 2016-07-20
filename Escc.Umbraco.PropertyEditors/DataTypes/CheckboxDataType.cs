@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Escc.EastSussexGovUK.UmbracoDocumentTypes.DataTypes;
 using Umbraco.Core.Models;
 
 namespace Escc.Umbraco.PropertyEditors.DataTypes

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Json;
-using Escc.EastSussexGovUK.UmbracoDocumentTypes.DataTypes;
 using Escc.Umbraco.PropertyEditors.App_Plugins.Escc.Umbraco.PropertyEditors.RichTextPropertyEditor;
 using Escc.Umbraco.PropertyEditors.DataTypes;
 using Umbraco.Core.Models;

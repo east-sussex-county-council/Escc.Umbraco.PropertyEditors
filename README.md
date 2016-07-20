@@ -22,8 +22,6 @@ This property editor extends the built-in rich text editor using several methods
         .example { -umbraco-stylesheet-property: 'Example property'; color: red; }
 Separating style rules into separate stylesheets allows them to be enabled or disabled for each data type that uses this property editor.
 
-See [Escc.UmbracoDocumentTypes.Website](https://github.com/east-sussex-county-council/Escc.UmbracoDocumentTypes.Website) for examples of how to create custom data types in code using this property editor.
-
 UkLocationPropertyEditor
 ------------------------
 This is for editing UK addresses in BS7666 format. It also collects geocordinates as both latitude and longitude, and eastings and northings.
