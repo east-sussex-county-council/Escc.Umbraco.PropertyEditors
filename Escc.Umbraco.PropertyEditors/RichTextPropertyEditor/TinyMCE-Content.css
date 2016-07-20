@@ -1,0 +1,3 @@
+﻿/* These styles are applied to text displayed within the TinyMCE editor */
+* { font: 16px normal Arial, 'Helvetica Neue', Helvetica, sans-serif; }
+b,strong { font-weight: bold;}

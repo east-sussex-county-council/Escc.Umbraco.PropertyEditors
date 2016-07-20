@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Escc_Umbraco_PropertyEditors_AppPlugins Include="$(MSBuildProjectDirectory)\..\packages\Escc.Umbraco.PropertyEditors.3.0.3\Content\App_Plugins\**\*.*"/>
+    <Escc_Umbraco_PropertyEditors_AppPlugins Include="$(MSBuildProjectDirectory)\..\packages\Escc.Umbraco.PropertyEditors.4.0.0\Content\App_Plugins\**\*.*"/>
+    <Escc_Umbraco_PropertyEditors_Css Include="$(MSBuildProjectDirectory)\..\packages\Escc.Umbraco.PropertyEditors.4.0.0\Content\css\**\*.*"/>
   </ItemGroup>
 
   <Target Name="Escc_Umbraco_PropertyEditors_CopyFiles" BeforeTargets="PrepareForBuild">
@@ -9,6 +10,11 @@
     <Copy
         SourceFiles="@(Escc_Umbraco_PropertyEditors_AppPlugins)"
         DestinationFiles="@(Escc_Umbraco_PropertyEditors_AppPlugins->'.\App_Plugins\%(RecursiveDir)%(Filename)%(Extension)')"
+        />
+    <Message Text="Copying Escc.Umbraco.PropertyEditors files to css" />
+    <Copy
+        SourceFiles="@(Escc_Umbraco_PropertyEditors_Css)"
+        DestinationFiles="@(Escc_Umbraco_PropertyEditors_Css->'.\css\%(RecursiveDir)%(Filename)%(Extension)')"
         />
   </Target>
 </Project>

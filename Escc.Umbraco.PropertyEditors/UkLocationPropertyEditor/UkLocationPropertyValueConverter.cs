@@ -6,7 +6,7 @@ using Escc.AddressAndPersonalDetails;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.PropertyEditors;
 
-namespace Escc.Umbraco.PropertyEditors.UKLocationPropertyValueConverter
+namespace Escc.Umbraco.PropertyEditors.UkLocationPropertyEditor
 {
     [PropertyValueType(typeof(AddressInfo))]
     [PropertyValueCache(PropertyCacheValue.All, PropertyCacheLevel.Request)]

@@ -7,7 +7,7 @@ using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.PropertyEditors;
 using Umbraco.Web.Templates;
 
-namespace Escc.Umbraco.PropertyEditors.RichTextPropertyValueConverter
+namespace Escc.Umbraco.PropertyEditors.RichTextPropertyEditor
 {
     /// <summary>
     /// A PropertyValueConverter for rich text saved in Umbraco, which runs formatters on the HTML before it is returned for display

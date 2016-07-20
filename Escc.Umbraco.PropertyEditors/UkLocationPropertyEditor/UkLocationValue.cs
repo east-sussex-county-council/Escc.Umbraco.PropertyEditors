@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Escc.Umbraco.PropertyEditors.UKLocationPropertyValueConverter
+namespace Escc.Umbraco.PropertyEditors.UkLocationPropertyEditor
 {
     [DataContract]
     public class UkLocationValue

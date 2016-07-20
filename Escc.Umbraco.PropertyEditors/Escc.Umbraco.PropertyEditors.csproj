@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Escc.Umbraco.PropertyEditors</RootNamespace>
     <AssemblyName>Escc.Umbraco.PropertyEditors</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -22,6 +22,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Escc.EastSussexGovUK.UmbracoBackOffice\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -94,7 +95,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="ExCSS">
-      <HintPath>..\packages\ExCSS.2.0.5\lib\net45\ExCSS.dll</HintPath>
+      <HintPath>..\packages\ExCSS.2.0.6\lib\net45\ExCSS.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
@@ -273,6 +274,8 @@
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\prevalues.controller.js" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\quote.png" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\rte.prevalues.html" />
+    <Content Include="RichTextPropertyEditor\TinyMCE-Content.css" />
+    <Content Include="RichTextPropertyEditor\TinyMCE-StyleSelector-Headings.css" />
     <Content Include="packages.config" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.BooleanPropertyEditor\package.manifest" />
     <Content Include="config\tinymceconfig.config.uninstall.xdt" />
@@ -301,17 +304,32 @@
     <Compile Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\RichTextPropertyEditorPreValues.cs" />
     <Compile Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\RichTextValidators.cs" />
     <Compile Include="App_Plugins\Escc.Umbraco.PropertyEditors.RichTextPropertyEditor\TinyMceButtons.cs" />
+    <Compile Include="RichTextPropertyEditor\TinyMceStylesheets.cs" />
+    <Compile Include="DataTypes\CheckboxDataType.cs" />
+    <Compile Include="DataTypes\EmailAddressDataType.cs" />
+    <Compile Include="DataTypes\MultiNodeTreePickerDataType.cs" />
+    <Compile Include="DataTypes\PhoneNumberDataType.cs" />
+    <Compile Include="RichTextPropertyEditor\RichTextAuthorNotesDataType.cs" />
+    <Compile Include="RichTextPropertyEditor\RichTextDataTypeService.cs" />
+    <Compile Include="RichTextPropertyEditor\RichTextEsccStandardDataType.cs" />
+    <Compile Include="RichTextPropertyEditor\RichTextPropertyEditorDefaultSettings.cs" />
+    <Compile Include="DataTypes\TwitterScriptDataType.cs" />
+    <Compile Include="UkLocationPropertyEditor\UkLocationDataType.cs" />
+    <Compile Include="DataTypes\UmbracoDataTypeService.cs" />
+    <Compile Include="DataTypes\UrlDataType.cs" />
     <Compile Include="PropertyEditorAliases.cs" />
     <Compile Include="Stylesheets\IStylesheetService.cs" />
     <Compile Include="Stylesheets\UmbracoStylesheetProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RichTextPropertyValueConverter\EncodeEmailAddressFormatter.cs" />
-    <Compile Include="RichTextPropertyValueConverter\IRichTextHtmlFormatter.cs" />
-    <Compile Include="RichTextPropertyValueConverter\RichTextPropertyValueConverter.cs" />
-    <Compile Include="RichTextPropertyValueConverter\TinyMceEmbedClassFormatter.cs" />
+    <Compile Include="RichTextPropertyEditor\EncodeEmailAddressFormatter.cs" />
+    <Compile Include="RichTextPropertyEditor\IRichTextHtmlFormatter.cs" />
+    <Compile Include="RichTextPropertyEditor\RichTextPropertyValueConverter.cs" />
     <Compile Include="Stylesheets\StylesheetService.cs" />
-    <Compile Include="UkLocationPropertyValueConverter\UkLocationPropertyValueConverter.cs" />
-    <Compile Include="UkLocationPropertyValueConverter\UkLocationValue.cs" />
+    <Compile Include="UkLocationPropertyEditor\UkLocationPropertyValueConverter.cs" />
+    <Compile Include="UkLocationPropertyEditor\UkLocationValue.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CSS\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

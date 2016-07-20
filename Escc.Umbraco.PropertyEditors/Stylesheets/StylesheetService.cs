@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Escc.Umbraco.PropertyEditors.RichTextPropertyEditor;
 using ExCSS;
 using umbraco.BusinessLogic;
 using umbraco.cms.businesslogic.web;

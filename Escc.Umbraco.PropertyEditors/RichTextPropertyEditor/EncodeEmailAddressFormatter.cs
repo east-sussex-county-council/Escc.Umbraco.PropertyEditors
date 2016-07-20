@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using Escc.Html;
 
-namespace Escc.Umbraco.PropertyEditors.RichTextPropertyValueConverter
+namespace Escc.Umbraco.PropertyEditors.RichTextPropertyEditor
 {
     public class EncodeEmailAddressFormatter : IRichTextHtmlFormatter
     {
