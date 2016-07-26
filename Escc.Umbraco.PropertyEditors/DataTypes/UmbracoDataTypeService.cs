@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Core.Services;
 
@@ -21,7 +22,7 @@ namespace Escc.Umbraco.PropertyEditors.DataTypes
         /// <param name="preValues">The pre-values.</param>
         public static void InsertDataType(string dataTypeName, string propertyEditorAlias, DataTypeDatabaseType databaseType, IDictionary<string, PreValue> preValues)
         {
-            var dataTypeService = new DataTypeService();
+            var dataTypeService = ApplicationContext.Current.Services.DataTypeService;
 
             List<IDataTypeDefinition> propertyEditorAliases = dataTypeService.GetDataTypeDefinitionByPropertyEditorAlias(propertyEditorAlias).ToList(); // Obtains all the property editor alias names.
 

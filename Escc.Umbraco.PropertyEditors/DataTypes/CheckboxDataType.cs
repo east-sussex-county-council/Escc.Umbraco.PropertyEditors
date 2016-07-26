@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Umbraco.Core.Models;
+using Umbraco.Web.UI.Umbraco.Masterpages;
 
 namespace Escc.Umbraco.PropertyEditors.DataTypes
 {
@@ -9,7 +10,7 @@ namespace Escc.Umbraco.PropertyEditors.DataTypes
     public static class CheckboxDataType
     {
         public const string DataTypeName = "Checkbox (true by default)";
-        public const string PropertyEditorAlias = PropertyEditorAliases.BooleanPropertyEditor;
+        public const string PropertyEditorAlias = "Umbraco.TrueFalse";
 
         public static void CreateCheckboxDataType()
         {

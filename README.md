@@ -17,11 +17,6 @@ This property editor extends the built-in rich text editor using several methods
 
 * A PropertyValueConverter automatically discovers all implementations of `IRichTextHtmlFormatter` in the current scope, and runs them when the property is displayed. One formatter is included by default, which encodes email addresses as HTML entities. Your can add your own formatters by implementing `IRichTextHtmlFormatter` and they will be picked up automatically.
 
-* A `StylesheetService` allows stylesheets to be read from a CSS file and added to Umbraco, where they can be used in the rich text editor to style the text in edit view. If you add a custom `-umbraco-stylesheet-property` declaration in a CSS rule, it will make the rule available in the TinyMCE style selector dropdown.
- 
-        .example { -umbraco-stylesheet-property: 'Example property'; color: red; }
-Separating style rules into separate stylesheets allows them to be enabled or disabled for each data type that uses this property editor.
-
 UkLocationPropertyEditor
 ------------------------
 This is for editing UK addresses in BS7666 format. It also collects geocordinates as both latitude and longitude, and eastings and northings.

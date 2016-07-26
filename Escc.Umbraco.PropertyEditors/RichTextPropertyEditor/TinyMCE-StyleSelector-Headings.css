@@ -1,3 +1,7 @@
 ﻿/* These styles can be made available in the TinyMCE style selector */
-h2 {-umbraco-stylesheet-property: 'Heading 2';font-size: 26px; }
-h3 {-umbraco-stylesheet-property: 'Heading 3'; font-size: 20px; }
+
+/**umb_name:Heading 2*/
+h2 { font-size: 26px; }
+
+/**umb_name:Heading 3*/
+h3 { font-size: 20px; }
