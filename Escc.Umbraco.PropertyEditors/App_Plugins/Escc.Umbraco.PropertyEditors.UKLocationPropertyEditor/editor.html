@@ -39,7 +39,7 @@
         <label for="{{model.alias}}_postcode">
             Postcode
         </label>
-        <input type="text" name="postcode" id="{{model.alias}}_postcode" ng-model="model.value.postcode" class="umb-editor umb-textstring textstring" maxlength="8" ng-change="validatePostcode()" />
+        <input type="text" name="postcode" id="{{model.alias}}_postcode" ng-model="model.value.postcode" class="umb-editor umb-textstring textstring" maxlength="8" ng-change="validatePostcode()" ng-keyup="formatPostcode($event)" />
     </div>
 
     <div ng-show="model.config.latLon">
@@ -53,7 +53,7 @@
         </label>
         <input type="text" name="lon" id="{{model.alias}}_lon" ng-model="model.value.lon" class="umb-editor umb-textstring textstring" ng-change="validateLongitude()" />
     </div>
-    
+
     <div ng-show="model.config.eastingNorthing">
         <label for="{{model.alias}}_easting" class="group">
             Easting
@@ -65,7 +65,7 @@
         </label>
         <input type="text" name="northing" id="{{model.alias}}_northing" ng-model="model.value.northing" class="umb-editor umb-textstring textstring" ng-change="validateNorthing()" />
     </div>
-    
+
     <div ng-show="model.config.latLon || model.config.eastingNorthing">
         <p>Use <a href="http://www.gridreferencefinder.com/" target="_new">UK Grid Reference Finder</a> to look up coordinates.</p>
     </div>
