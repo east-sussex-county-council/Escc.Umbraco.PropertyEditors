@@ -8,6 +8,10 @@ using Umbraco.Core.PropertyEditors;
 
 namespace Escc.Umbraco.PropertyEditors.PersonNamePropertyEditor
 {
+    /// <summary>
+    /// Automatically convert the JSON value of a property using a <c>PersonNamePropertyEditor</c> to a <see cref="PersonName"/>
+    /// </summary>
+    /// <seealso cref="Umbraco.Core.PropertyEditors.PropertyValueConverterBase" />
     [PropertyValueType(typeof(PersonName))]
     [PropertyValueCache(PropertyCacheValue.All, PropertyCacheLevel.Request)]
     public class PersonNamePropertyValueConverter : PropertyValueConverterBase
@@ -22,6 +26,13 @@ namespace Escc.Umbraco.PropertyEditors.PersonNamePropertyEditor
             return propertyType.PropertyEditorAlias == PropertyEditorAliases.PersonNamePropertyEditor;
         }
 
+        /// <summary>
+        /// Converts the JSON property data to a <see cref="PersonName"/>, or <c>null</c> if empty.
+        /// </summary>
+        /// <param name="propertyType">Type of the property.</param>
+        /// <param name="source">The source.</param>
+        /// <param name="preview">if set to <c>true</c> [preview].</param>
+        /// <returns></returns>
         public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
         {
             if (source == null) return null;
@@ -46,16 +57,30 @@ namespace Escc.Umbraco.PropertyEditors.PersonNamePropertyEditor
                     data.Suffixes.AddRange(value.Suffixes.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries));
                 }
 
-                return data;
+                return data.ToString().Length > 0 ? data : null;
             }
         }
 
+        /// <summary>
+        /// Converts the source to object.
+        /// </summary>
+        /// <param name="propertyType">Type of the property.</param>
+        /// <param name="source">The source.</param>
+        /// <param name="preview">if set to <c>true</c> [preview].</param>
+        /// <returns></returns>
         public override object ConvertSourceToObject(PublishedPropertyType propertyType, object source, bool preview)
         {
             // source should come from ConvertSource and be the right type (or null) already
             return source;
         }
 
+        /// <summary>
+        /// Converts the source to x path.
+        /// </summary>
+        /// <param name="propertyType">Type of the property.</param>
+        /// <param name="source">The source.</param>
+        /// <param name="preview">if set to <c>true</c> [preview].</param>
+        /// <returns></returns>
         public override object ConvertSourceToXPath(PublishedPropertyType propertyType, object source, bool preview)
         {
             // source should come from ConvertSource and be the right type (or null) already

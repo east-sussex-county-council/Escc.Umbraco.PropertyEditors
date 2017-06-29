@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Escc.Umbraco.PropertyEditors.DataTypes;
 using Umbraco.Core.Models;
+using Umbraco.Inception.Attributes;
 
 namespace Escc.Umbraco.PropertyEditors.UkLocationPropertyEditor
 {
