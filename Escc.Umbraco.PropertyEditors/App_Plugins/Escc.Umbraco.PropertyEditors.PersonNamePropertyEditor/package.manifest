@@ -1,0 +1,15 @@
+{   
+    propertyEditors: [      
+        {
+            alias: "Escc.Umbraco.PropertyEditors.PersonNamePropertyEditor",
+            name: "Person name",
+            editor: {
+                view: "~/App_Plugins/Escc.Umbraco.PropertyEditors.PersonNamePropertyEditor/editor.html"
+            }
+        }
+    ]
+    ,
+    javascript: [
+        '~/App_Plugins/Escc.Umbraco.PropertyEditors.PersonNamePropertyEditor/PersonNamePropertyEditor.js'
+    ]
+}

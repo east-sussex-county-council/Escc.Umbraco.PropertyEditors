@@ -1,0 +1,7 @@
+﻿.person-name { float: left; }
+.person-name label {clear: left; float: left; width: 33%;margin: 2px 0;padding: 0;min-width: 8em; }
+.person-name .field-label, .person-name small { margin-right: 5px; }
+.person-name small { display: inline-block; }
+.person-name input { float: left; min-width: 0; margin: 2px 0; }
+.person-name input[name=titles], .person-name input[name=suffixes] { max-width: 10em; }
+.person-name input[name=givenNames], .person-name input[name=familyName] { max-width: 20em; }

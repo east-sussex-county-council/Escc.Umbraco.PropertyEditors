@@ -3,10 +3,6 @@ Escc.Umbraco.PropertyEditors
 
 Core property editors for Umbraco 7.
 
-BooleanPropertyEditor
----------------------
-This is a copy of the built-in true/false editor. This copy allows the checkbox to be checked by default. 
-
 RichTextPropertyEditor
 ------------------------------
 This property editor extends the built-in rich text editor using several methods.
@@ -15,7 +11,10 @@ This property editor extends the built-in rich text editor using several methods
 
 * A custom pre-value editor extends the built-in options, allowing validators and formatters to be enabled or disabled for each data type that uses this property editor. The code in `controller.js` looks for these pre-values to see what to run. The pre-values are stored in the Umbraco database as JSON, and the `RichTextPropertyEditorPreValues` class is designed to serialise to the correct JSON format.
 
-* A PropertyValueConverter automatically discovers all implementations of `IRichTextHtmlFormatter` in the current scope, and runs them when the property is displayed. One formatter is included by default, which encodes email addresses as HTML entities. Your can add your own formatters by implementing `IRichTextHtmlFormatter` and they will be picked up automatically.
+* A `PropertyValueConverter` automatically discovers all implementations of `IRichTextHtmlFormatter` in the current scope, and runs them when the property is displayed. One formatter is included by default, which encodes email addresses as HTML entities. Your can add your own formatters by implementing `IRichTextHtmlFormatter` and they will be picked up automatically.
+
+## PersonNamePropertyEditor
+This is for editing people's names, and includes a `PropertyValueConverter` which returns a `PersonName` compliant with the UK government address and personal details standard.
 
 UkLocationPropertyEditor
 ------------------------

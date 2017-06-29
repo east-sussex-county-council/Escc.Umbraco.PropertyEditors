@@ -292,6 +292,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.PersonNamePropertyEditor\editor.html" />
+    <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.PersonNamePropertyEditor\PersonNamePropertyEditor.css" />
+    <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.PersonNamePropertyEditor\PersonNamePropertyEditor.js" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UkLocationPropertyEditor\editor.html" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UkLocationPropertyEditor\UKLocationPropertyEditor.css" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UkLocationPropertyEditor\UKLocationPropertyEditor.js" />
@@ -310,15 +313,14 @@
     <Content Include="RichTextPropertyEditor\TinyMCE-Content.css" />
     <Content Include="RichTextPropertyEditor\TinyMCE-StyleSelector-Headings.css" />
     <Content Include="packages.config" />
-    <Content Include="config\tinymceconfig.config.uninstall.xdt" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.EmailAddressPropertyEditor\package.manifest" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.PhonePropertyEditor\package.manifest" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.TwitterScriptPropertyEditor\package.manifest" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UrlPropertyEditor\package.manifest" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.UkLocationPropertyEditor\package.manifest" />
-    <None Include="config\tinymceconfig.config.install.xdt" />
     <Content Include="RichTextPropertyEditor\tinymceconfig.config.install.xdt" />
     <Content Include="RichTextPropertyEditor\tinymceconfig.config.uninstall.xdt" />
+    <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.PersonNamePropertyEditor\package.manifest" />
     <None Include="Web.example.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -342,11 +344,14 @@
     <Compile Include="DataTypes\EmailAddressDataType.cs" />
     <Compile Include="DataTypes\MultiNodeTreePickerDataType.cs" />
     <Compile Include="DataTypes\PhoneNumberDataType.cs" />
+    <Compile Include="PersonNamePropertyEditor\PersonNameValue.cs" />
     <Compile Include="RichTextPropertyEditor\RichTextAuthorNotesDataType.cs" />
     <Compile Include="RichTextPropertyEditor\RichTextDataTypeService.cs" />
     <Compile Include="RichTextPropertyEditor\RichTextEsccStandardDataType.cs" />
     <Compile Include="RichTextPropertyEditor\RichTextPropertyEditorDefaultSettings.cs" />
     <Compile Include="DataTypes\TwitterScriptDataType.cs" />
+    <Compile Include="PersonNamePropertyEditor\PersonNameDataType.cs" />
+    <Compile Include="PersonNamePropertyEditor\PersonNamePropertyValueConverter.cs" />
     <Compile Include="UkLocationPropertyEditor\UkLocationDataType.cs" />
     <Compile Include="DataTypes\UmbracoDataTypeService.cs" />
     <Compile Include="DataTypes\UrlDataType.cs" />

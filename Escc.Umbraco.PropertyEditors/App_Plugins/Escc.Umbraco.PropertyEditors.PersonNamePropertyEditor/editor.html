@@ -1,0 +1,21 @@
+<div ng-controller="Escc.Umbraco.PropertyEditors.PersonNameController" ng-model="model.value" class="person-name">
+    <label for="{{model.alias}}_titles">
+        <span class="field-label">Title</span> <small>(eg Dr or Cllr)</small>
+    </label>
+    <input type="text" name="titles" id="{{model.alias}}_titles" ng-model="model.value.titles" class="umb-editor umb-textstring textstring" />
+
+    <label for="{{model.alias}}_givenNames">
+        <span class="field-label">Given name(s)</span>
+</label>
+    <input type="text" name="givenNames" id="{{model.alias}}_givenNames" ng-model="model.value.givenNames" class="umb-editor umb-textstring textstring" />
+
+    <label for="{{model.alias}}_familyName">
+        <span class="field-label">Family name</span>
+</label>
+    <input type="text" name="familyName" id="{{model.alias}}_familyName" ng-model="model.value.familyName" class="umb-editor umb-textstring textstring" maxlength="35" />
+
+    <label for="{{model.alias}}_suffixes">
+        <span class="field-label">Suffix(es)</span> <small>(eg PhD or MBE)</small>
+</label>
+    <input type="text" name="suffixes" id="{{model.alias}}_suffixes" ng-model="model.value.suffixes" class="umb-editor umb-textstring textstring" />
+</div>

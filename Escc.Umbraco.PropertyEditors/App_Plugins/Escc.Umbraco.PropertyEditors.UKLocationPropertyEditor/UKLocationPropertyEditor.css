@@ -1,4 +1,4 @@
-﻿.uk-location { overflow: hidden; }
+﻿.uk-location { float: left; }
 .uk-location label {clear: left; float: left; width: 33%;margin: 2px 0;padding: 0; }
 .uk-location input { float: left; min-width: 0;width: 50%;margin: 2px 0;}
 .uk-location [name=locality], .uk-location [name=town], .uk-location [name=administrativeArea], .uk-location [name=lat], .uk-location [name=lon] { max-width: 15em; }
