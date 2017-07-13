@@ -8,6 +8,11 @@
       <priority>45</priority>
     </command>
   </commands>
+  <plugins>
+    <!-- Ensure the umbracolink plugin is present. It is by default in 7.4.3 but not in 7.5.14, yet in 7.5.14 the link button in a rich text editor doesn't work without it -->
+    <plugin xdt:Transform="Remove"  xdt:Locator="Condition([.='umbracolink'])"/>
+    <plugin loadOnFrontend="true" xdt:Transform="Insert">umbracolink</plugin>
+  </plugins>
   <validElements xdt:Transform="Remove" />
   <validElements xdt:Transform="Insert">
     <![CDATA[+a[id|rel|rev|charset|hreflang|dir|lang|tabindex|accesskey|type|name|href|class],-strong/-b[class],-em/-i[class],
