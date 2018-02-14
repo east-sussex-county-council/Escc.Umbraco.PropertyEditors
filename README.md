@@ -29,7 +29,7 @@ These apply regular expression validation. There is built-in functionality for t
 Install using NuGet
 -------------------
 
-This project is published as a NuGet package to our private feed. We use [NuBuild](https://github.com/bspell1/NuBuild) to make creating the NuGet package really easy, and [reference our private feed using a nuget.config file](http://blog.davidebbo.com/2014/01/the-right-way-to-restore-nuget-packages.html).
+This project is published as a NuGet package to our private feed. 
 
 When you install the package it copies the property editors into `App_Plugins` and references the DLL output. These are excluded from the consuming project's git respository by its `.gitignore` file. 
 

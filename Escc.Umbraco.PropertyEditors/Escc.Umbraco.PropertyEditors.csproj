@@ -23,6 +23,7 @@
     <RestorePackages>true</RestorePackages>
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -326,6 +327,9 @@
     <Content Include="RichTextPropertyEditor\tinymceconfig.config.install.xdt" />
     <Content Include="RichTextPropertyEditor\tinymceconfig.config.uninstall.xdt" />
     <Content Include="App_Plugins\Escc.Umbraco.PropertyEditors.PersonNamePropertyEditor\package.manifest" />
+    <Content Include="Escc.Umbraco.PropertyEditors.nuspec" />
+    <Content Include="Escc.Umbraco.PropertyEditors.targets" />
+    <Content Include="build-nuget.cmd" />
     <None Include="Web.example.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -394,6 +398,9 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>if "$(ConfigurationName)"=="Release" "$(ProjectDir)build-nuget.cmd" $(ProjectDir)</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

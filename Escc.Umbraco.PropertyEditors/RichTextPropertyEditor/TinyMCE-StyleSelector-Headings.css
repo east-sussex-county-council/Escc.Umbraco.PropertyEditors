@@ -1,5 +1,8 @@
 ﻿/* These styles can be made available in the TinyMCE style selector */
 
+/**umb_name:Normal*/
+p { font-size: 16px; }
+
 /**umb_name:Heading 2*/
 h2 { font-size: 26px; }
 
