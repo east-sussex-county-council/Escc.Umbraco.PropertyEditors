@@ -22,7 +22,7 @@ This is for editing UK addresses in BS7666 format. It also collects geocordinate
 
 Future iterations could see the validation improved (currently it doesn't prevent saving), an address lookup added on the postcode field and a Google map for selecting the coordinates.
 
-EmailAddressPropertyEditor, PhonePropertyEditor, UrlPropertyEditor, TwitterScriptPropertyEditor
+EmailAddressPropertyEditor, PhonePropertyEditor, UrlPropertyEditor
 ------------------------------------------------- 
 These apply regular expression validation. There is built-in functionality for this in Umbraco but, when tested with 7.1.4, it caused an error when a field was left empty (even if the regular expression allowed for that).  
 
