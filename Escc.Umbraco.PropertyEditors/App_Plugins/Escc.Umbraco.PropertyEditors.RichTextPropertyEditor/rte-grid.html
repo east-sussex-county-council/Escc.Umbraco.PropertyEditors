@@ -1,0 +1,27 @@
+<div ng-controller="Escc.Umbraco.PropertyEditors.RichTextPropertyEditor.GridController as vm">
+    <div validate-rich-text-grid="validate-rich-text-grid" apply-grid-formatters="apply-grid-formatters">
+        <p ng-show="propertyForm.$error.clickHere" class="alert alert-error clickHere"></p>
+        <p ng-show="propertyForm.$error.linkToHere" class="alert alert-error linkToHere"></p>
+        <p ng-show="propertyForm.$error.visit" class="alert alert-error visit"></p>
+        <p ng-show="propertyForm.$error.more" class="alert alert-error more"></p>
+        <p ng-show="propertyForm.$error.allCaps" class="alert alert-error allCaps"></p>
+        <p ng-show="propertyForm.$error.urlAsLinkText" class="alert alert-error urlAsLinkText"></p>
+        <p ng-show="propertyForm.$error.onlyLinks" class="alert alert-error onlyLinks"></p>
+        <p ng-show="propertyForm.$error.noDocuments" class="alert alert-error noDocuments"></p>
+        <p ng-show="propertyForm.$error.maximumWords" class="alert alert-error maximumWords"></p>
+        <div ng-class="{'escc-invalid': propertyForm.$invalid}">
+            <div grid-rte
+                 configuration="model.config.rte"
+                 value="control.value"
+                 unique-id="control.$uniqueId"
+                 on-link-picker-click="vm.openLinkPicker">
+            </div>
+
+            <umb-overlay ng-if="vm.linkPickerOverlay.show"
+                         model="vm.linkPickerOverlay"
+                         position="right"
+                         view="vm.linkPickerOverlay.view">
+            </umb-overlay>
+            </div>
+        </div>
+</div>

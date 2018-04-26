@@ -1,32 +1,45 @@
 {
-    "propertyEditors":  [
-        {
-            "alias":  "Escc.Umbraco.PropertyEditors.RichTextPropertyEditor",
-            "name":  "Rich text editor (ESCC)",
-            "editor":  {
-                "view": "~/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/rte.html",
-                "valueType": "TEXT"
-            },
-            "prevalues": {
-                "fields":  [
-                    {
-                        "label": "Rich text editor settings",
-                        "view": "~/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/rte.prevalues.html",
-                        "hideLabel": true,
-                        "key": "editor"
-                    },
-                    {
-                        "label": "Hide Label",
-                        "view": "boolean",
-                        "key": "hideLabel"
-                    }
-                ]
-            }
-        }
-    ],
-    
-    "javascript":  [
-        "~/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/controller.js",
-        "~/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/prevalues.controller.js"
-    ]
+  "propertyEditors": [
+    {
+      "alias": "Escc.Umbraco.PropertyEditors.RichTextPropertyEditor",
+      "name": "Rich text editor (ESCC)",
+      "editor": {
+        "view": "~/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/rte.html",
+        "valueType": "TEXT"
+      },
+      "prevalues": {
+        "fields": [
+          {
+            "label": "Rich text editor settings",
+            "view": "~/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/rte.prevalues.html",
+            "hideLabel": true,
+            "key": "editor"
+          },
+          {
+            "label": "Hide Label",
+            "view": "boolean",
+            "key": "hideLabel"
+          }
+        ]
+      }
+    }
+  ],
+  "gridEditors": [
+    {
+      "name": "Rich text editor (ESCC)",
+      "alias": "escc-rich-text",
+      "view": "~/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/rte-grid.html",
+      "render": "~/Views/Partials/Grid/Editors/Rte.cshtml",
+      "icon": "icon-edit",
+      "config": {
+        "formatters": [ "nbsp", "removeEmptyLinks", "removeEmptyBlock", "removeTarget", "removeIfMissingAttribute", "autocorrect", "fullstopsOutsideLinks", "spacesOutsideLinks", "smartQuotes", "enDashes", "ellipsis", "startHeadingsWithCapital", "startContentWithCapital" ],
+        "validators": [ "clickHere", "linkToHere", "visit", "more", "allCaps", "urlAsLinkText" ]
+      }
+    }
+  ],
+  "javascript": 
+  [
+    "~/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/controller.js",
+    "~/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/prevalues.controller.js"
+  ]
 }

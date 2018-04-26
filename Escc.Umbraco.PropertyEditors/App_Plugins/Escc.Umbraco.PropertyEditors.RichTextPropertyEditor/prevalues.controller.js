@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("Escc.Umbraco.PropertyEditors.RichTextPropertyEditor.PreValueController",
-    function ($scope, $timeout, $log, tinyMceService, stylesheetResource) {
+    function ($scope, $timeout, $log, tinyMceService, stylesheetResource, assetsService) {
 
         // Get the saved pre-values
         var cfg = tinyMceService.defaultPrevalues();
@@ -29,8 +29,54 @@
         // Load the TinyMCE button options to select from
         tinyMceService.configuration().then(function (config) {
             $scope.tinyMceConfig = config;
-
+            // extend commands with properties for font-icon and if it is a custom command
+            $scope.tinyMceConfig.commands = _.map($scope.tinyMceConfig.commands, function (obj) {
+                var icon = getFontIcon(obj.frontEndCommand);
+                return angular.extend(obj, {
+                    fontIcon: icon.name,
+                    isCustom: icon.isCustom
+                });
+            });
         });
+
+        // map properties for specific commands
+        function getFontIcon(alias) {
+            var icon = {
+                name: alias,
+                isCustom: false
+            };
+            switch (alias) {
+                case 'codemirror':
+                    icon.name = 'code';
+                    icon.isCustom = false;
+                    break;
+                case 'styleselect':
+                case 'fontsizeselect':
+                    icon.name = 'icon-list';
+                    icon.isCustom = true;
+                    break;
+                case 'umbembeddialog':
+                    icon.name = 'icon-tv';
+                    icon.isCustom = true;
+                    break;
+                case 'umbmediapicker':
+                    icon.name = 'icon-picture';
+                    icon.isCustom = true;
+                    break;
+                case 'umbmacro':
+                    icon.name = 'icon-settings-alt';
+                    icon.isCustom = true;
+                    break;
+                case 'umbmacro':
+                    icon.name = 'icon-settings-alt';
+                    icon.isCustom = true;
+                    break;
+                default:
+                    icon.name = alias;
+                    icon.isCustom = false;
+            }
+            return icon;
+        }
 
         // Load the stylesheets to select from
         stylesheetResource.getAll().then(function (stylesheets) {
@@ -72,7 +118,7 @@
             { "name" : "smartQuotes", "displayName" : "Use smart quotes" },
             { "name" : "enDashes", "displayName" : "Convert hyphens to en-dashes" },
             { "name" : "ellipsis", "displayName" : "Convert ... to ellipsis" },
-            { "name" : "startHeadingsWithCapital", "displayName" : "Always start headings with a captial letter" },
+            { "name" : "startHeadingsWithCapital", "displayName" : "Always start headings with a capital letter" },
             { "name" : "startContentWithCapital", "displayName": "Always start the content with a capital letter" },
             { "name" : "twoListsOfLinks", "displayName" : "Format content as two lists of links" }
         ];
@@ -157,12 +203,14 @@
         }
 
         // Save TinyMCE settings
-        $scope.$on("formSubmitting", function (ev, args) {
-
+        var unsubscribe = $scope.$on('formSubmitting', function (ev, args) {
             var commands = _.where($scope.tinyMceConfig.commands, { selected: true });
-            $scope.model.value.toolbar = _.pluck(commands, "frontEndCommand");
-
-
+            $scope.model.value.toolbar = _.pluck(commands, 'frontEndCommand');
         });
-
+        // when the scope is destroyed we need to unsubscribe
+        $scope.$on('$destroy', function () {
+            unsubscribe();
+        });
+        // load TinyMCE skin which contains css for font-icons
+        assetsService.loadCss('lib/tinymce/skins/umbraco/skin.min.css');
     });

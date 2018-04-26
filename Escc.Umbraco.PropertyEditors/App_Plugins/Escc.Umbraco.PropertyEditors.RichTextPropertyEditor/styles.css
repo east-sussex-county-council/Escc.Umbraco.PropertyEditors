@@ -1,1 +1,7 @@
-﻿.escc-invalid {border: 1px solid #953b39; }
+﻿/* If there are multiple validation errors reduce the space between them, 
+    and tighten up the gap between the errors and the TinyMCE control */
+[validate-rich-text-grid] .alert { margin-bottom: 2px; }
+[validate-rich-text-grid] .alert + .escc-invalid { margin-bottom: -2px; }
+
+/* Show a red border around an invalid rich text editor */
+.escc-invalid {border: 1px solid #953b39; }
