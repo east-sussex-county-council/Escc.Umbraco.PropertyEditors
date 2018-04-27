@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0"?>
 <tinymceConfig xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
   <commands>
+    <command xdt:Transform="Remove" xdt:Locator="Condition([./umbracoAlias='Blockquote'])" />
     <command xdt:Transform="Insert">
       <umbracoAlias>Blockquote</umbracoAlias>
       <icon>../App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/quote.png</icon>
