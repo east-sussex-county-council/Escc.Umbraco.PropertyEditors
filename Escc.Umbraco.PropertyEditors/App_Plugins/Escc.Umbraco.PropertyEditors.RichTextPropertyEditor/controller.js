@@ -209,7 +209,7 @@
 
                 // update error message template with configured maximum
                 this.template = this.template.replace('{0}', this.max);
-                
+
                 // strip tags
                 value = value.replace(/<\/?[^>]*>/gi, '');
 
@@ -555,9 +555,11 @@
      * @param AngularScope scope
      * @param object[] configuredObjects
      * @param function action
+     * @param function init(alias)
      */
-    function ApplyConfigToGridEditorOnSave(scope, configuredObjects, action) {
+    function ApplyConfigToGridEditorOnSave(scope, configuredObjects, action, init) {
         var unsubscribe = scope.$on('formSubmitting', function (event) {
+            let initAliases = [];
             if (scope.model.value && scope.model.value.sections) {
                 _.each(scope.model.value.sections, function (section) {
                     if (section.rows) {
@@ -567,7 +569,15 @@
                                     if (area.controls) {
                                         _.each(area.controls, function (control) {
                                             if (control.editor && configuredObjects.hasOwnProperty(control.editor.alias)) {
-                                                angular.forEach(configuredObjects[control.editor.alias], function (configuredObject) { action(control, configuredObject); } );
+
+                                                // Run an init function the first time any given grid editor alias is encountered for this form submission
+                                                if (init && initAliases.indexOf(control.editor.alias) == -1) {
+                                                    init(control.editor.alias);
+                                                    initAliases.push(control.editor.alias);
+                                                }
+
+                                                // Run the action for each of the objects configured for this grid editor
+                                                angular.forEach(configuredObjects[control.editor.alias], function (configuredObject) { action(control, configuredObject); });
                                             }
                                         });
                                     }
@@ -598,150 +608,164 @@
         // Load custom CSS for this editor
         assetsService.loadCss("/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/styles.css");
     })
-    .controller('Escc.Umbraco.PropertyEditors.RichTextPropertyEditor.GridController', function ($scope, tinyMceService, macroService, assetsService) {
+        .controller('Escc.Umbraco.PropertyEditors.RichTextPropertyEditor.GridController', function ($scope, tinyMceService, macroService, assetsService) {
 
-        // Controller for a rich text editor when it's used as a grid editor
-        var vm = this;
-        vm.openLinkPicker = openLinkPicker;
-        function openLinkPicker(editor, currentTarget, anchorElement) {
-            vm.linkPickerOverlay = {
-                view: 'linkpicker',
-                currentTarget: currentTarget,
-                show: true,
-                submit: function (model) {
-                    tinyMceService.insertLinkInEditor(editor, model.target, anchorElement);
-                    vm.linkPickerOverlay.show = false;
-                    vm.linkPickerOverlay = null;
-                }
-            };
-        }
-
-        // Load custom CSS for this editor
-        assetsService.loadCss("/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/styles.css");
-    })
-    .directive("validateRichText", function () {
-        return {
-            restrict: 'A',
-            link: function (scope, elem, attrs) {
-
-                // Validate a rich text editor when it's used as the property editor for a data type
-
-                // Get saved prevalues for the datatype
-                var editorConfig = scope.model.config.editor;
-                if (!editorConfig || angular.isString(editorConfig)) {
-                    editorConfig = [];
-                }
-
-                // Set up validators matching the selected prevalues for the datatype
-                // then apply those validators when the page is saved. Use Angular $setValidity to 
-                // allow or cancel the save operation.
-                var allValidators = new RichTextValidators();
-                var activeValidators = [];
-
-                angular.forEach(editorConfig.validators, function (validatorConfig) {
-                    if (validatorConfig && validatorConfig.hasOwnProperty("max")) {
-                        allValidators[validatorConfig.name].max = validatorConfig.max;
+            // Controller for a rich text editor when it's used as a grid editor
+            var vm = this;
+            vm.openLinkPicker = openLinkPicker;
+            function openLinkPicker(editor, currentTarget, anchorElement) {
+                vm.linkPickerOverlay = {
+                    view: 'linkpicker',
+                    currentTarget: currentTarget,
+                    show: true,
+                    submit: function (model) {
+                        tinyMceService.insertLinkInEditor(editor, model.target, anchorElement);
+                        vm.linkPickerOverlay.show = false;
+                        vm.linkPickerOverlay = null;
                     }
-                    activeValidators.push(allValidators[validatorConfig.name]);
-                });
+                };
+            }
 
+            // Load custom CSS for this editor
+            assetsService.loadCss("/App_Plugins/Escc.Umbraco.PropertyEditors.RichTextPropertyEditor/styles.css");
+        })
+        .directive("validateRichText", function () {
+            return {
+                restrict: 'A',
+                link: function (scope, elem, attrs) {
 
-                // Validation using the $parsers pipeline wasn't working with tinyMCE, but can be done by watching for 
-                // changes to $scope.model.value, which is updated from tinyMCE by the inherited controller. 
-                // Remove the watch when done to avoid a memory leak.
-                var stopWatching = scope.$watch('model.value', function () {
-                    angular.forEach(activeValidators, function (validator) {
-                        var valid = validator.validate(scope.model.value);
-                        $("." + validator.id, elem).html(validator.message || validator.template);
-                        scope.propertyForm.$setValidity(validator.id, valid);
+                    // Validate a rich text editor when it's used as the property editor for a data type
+
+                    // Get saved prevalues for the datatype
+                    var editorConfig = scope.model.config.editor;
+                    if (!editorConfig || angular.isString(editorConfig)) {
+                        editorConfig = [];
+                    }
+
+                    // Set up validators matching the selected prevalues for the datatype
+                    // then apply those validators when the page is saved. Use Angular $setValidity to 
+                    // allow or cancel the save operation.
+                    var allValidators = new RichTextValidators();
+                    var activeValidators = [];
+
+                    angular.forEach(editorConfig.validators, function (validatorConfig) {
+                        if (validatorConfig && validatorConfig.hasOwnProperty("max")) {
+                            allValidators[validatorConfig.name].max = validatorConfig.max;
+                        }
+                        activeValidators.push(allValidators[validatorConfig.name]);
                     });
-                });
 
-                scope.$on('$destroy', function () {
-                    stopWatching();
-                });
-            }
-        }
-    })
-    .directive("validateRichTextGrid", function () {
-        return {
-            restrict: 'A',
-            link: function (scope, elem, attrs) {
 
-                // Validate rich text when it's used as a grid editor
+                    // Validation using the $parsers pipeline wasn't working with tinyMCE, but can be done by watching for 
+                    // changes to $scope.model.value, which is updated from tinyMCE by the inherited controller. 
+                    // Remove the watch when done to avoid a memory leak.
+                    var stopWatching = scope.$watch('model.value', function () {
+                        angular.forEach(activeValidators, function (validator) {
+                            var valid = validator.validate(scope.model.value);
+                            $("." + validator.id, elem).html(validator.message || validator.template);
+                            scope.propertyForm.$setValidity(validator.id, valid);
+                        });
+                    });
 
-                // Read validators for each grid editor from configuration in package.manifest,
-                // then apply those validators when the page is saved. Use Angular $setValidity to 
-                // allow or cancel the save operation.
-                var activeValidators = ReadConfigForGridEditor(scope, "validators", new RichTextValidators());
-
-                ApplyConfigToGridEditorOnSave(scope, activeValidators, function (control, validator) {
-                    var valid = validator.validate(control.value);
-                    $("." + validator.id, elem).html(validator.message || validator.template);
-                    scope.propertyForm.$setValidity(validator.id, valid);
-                });                            
-            }
-        }
-    })
-    .directive("applyFormatters", function () {
-        return {
-            restrict: 'A',
-            require: 'ngModel',
-            link: function (scope, elem, attrs, ngModel) {
-
-                // Format HTML in a rich text editor when it's used as the property editor for a data type
-
-                // Get saved prevalues for the datatype
-                var editorConfig = scope.model.config.editor;
-                if (!editorConfig || angular.isString(editorConfig)) {
-                    editorConfig = [];
+                    scope.$on('$destroy', function () {
+                        stopWatching();
+                    });
                 }
+            }
+        })
+        .directive("validateRichTextGrid", function () {
+            return {
+                restrict: 'A',
+                link: function (scope, elem, attrs) {
 
-                // Create the formatters which will be applied to HTML as it is saved.  
-                // Each one should be a function which accepts one string argument and returns a string. 
-                // Use ngModel.$formatters.push(formatter_function) to register a formatter.
-                var allFormatters = new RichTextFormatters();
+                    // Validate rich text when it's used as a grid editor
 
-                angular.forEach(editorConfig.formatters, function (formatterId) {
-                    ngModel.$formatters.push(allFormatters[formatterId]);
-                });
+                    // Read validators for each grid editor from configuration in package.manifest,
+                    // then apply those validators when the page is saved. Use Angular $setValidity to 
+                    // allow or cancel the save operation.
+                    var activeValidators = ReadConfigForGridEditor(scope, "validators", new RichTextValidators());
 
-                // Apply formatters to HTML as it is being saved. Normally this is built into Angular, but we need 
-                // to get and set the content from the tinyMCE editor rather than $scope.model.value, because the 
-                // inherited controller above goes on to set $scope.model.value from tinyMCE, so if we rely on the
-                // default behaviour and don't change the tinyMCE value our work will be overwritten.
-                //
-                // Note: this is done on save rather than on change to avoid moving the cursor unexpectedly in TinyMCE.
-                scope.$on("formSubmitting", function (ev, args) {
-                    var instance = tinymce.get(scope.textAreaHtmlId);
-                    var html = instance.getContent();
+                    ApplyConfigToGridEditorOnSave(scope, activeValidators, function (control, validator) {
+                        var valid = validator.validate(control.value);
+                        $("." + validator.id, elem).html(validator.message || validator.template);
 
-                    angular.forEach(ngModel.$formatters, function (format) {
-                        html = format(html);
+                        // We only need one validator to fail for the property to be invalid, so we are only testing if we haven't yet
+                        // found a failure. This is important as one grid property can have multiple grid editors, and we want to make sure 
+                        // that if one grid editor fails validation, it's not overridden by a success on a subsequent editor.
+                        if (scope.propertyForm.$valid) {
+                            scope.propertyForm.$setValidity(validator.id, valid);
+                        }
+                    }, function (alias) {
+                            // On each form submission, the first time a particular grid editor alias is encountered reset the valid state to true.
+                            // This allows validation to start again when resubmitting a page that has previously failed validation. By default it
+                            // starts from the previous result, which is false.
+                            for (var i = 0; i < activeValidators[alias].length; i++) {
+                                let validator = activeValidators[alias][i];
+                                scope.propertyForm.$setValidity(validator.id, true);
+                            }
+                        });
+                }
+            }
+        })
+        .directive("applyFormatters", function () {
+            return {
+                restrict: 'A',
+                require: 'ngModel',
+                link: function (scope, elem, attrs, ngModel) {
+
+                    // Format HTML in a rich text editor when it's used as the property editor for a data type
+
+                    // Get saved prevalues for the datatype
+                    var editorConfig = scope.model.config.editor;
+                    if (!editorConfig || angular.isString(editorConfig)) {
+                        editorConfig = [];
+                    }
+
+                    // Create the formatters which will be applied to HTML as it is saved.  
+                    // Each one should be a function which accepts one string argument and returns a string. 
+                    // Use ngModel.$formatters.push(formatter_function) to register a formatter.
+                    var allFormatters = new RichTextFormatters();
+
+                    angular.forEach(editorConfig.formatters, function (formatterId) {
+                        ngModel.$formatters.push(allFormatters[formatterId]);
                     });
 
-                    instance.setContent(html);
-                });
+                    // Apply formatters to HTML as it is being saved. Normally this is built into Angular, but we need 
+                    // to get and set the content from the tinyMCE editor rather than $scope.model.value, because the 
+                    // inherited controller above goes on to set $scope.model.value from tinyMCE, so if we rely on the
+                    // default behaviour and don't change the tinyMCE value our work will be overwritten.
+                    //
+                    // Note: this is done on save rather than on change to avoid moving the cursor unexpectedly in TinyMCE.
+                    scope.$on("formSubmitting", function (ev, args) {
+                        var instance = tinymce.get(scope.textAreaHtmlId);
+                        var html = instance.getContent();
+
+                        angular.forEach(ngModel.$formatters, function (format) {
+                            html = format(html);
+                        });
+
+                        instance.setContent(html);
+                    });
+                }
             }
-        }
-    })
-    .directive("applyGridFormatters", function () {
-        return {
-            restrict: 'A',
-            link: function (scope, elem, attrs) {
+        })
+        .directive("applyGridFormatters", function () {
+            return {
+                restrict: 'A',
+                link: function (scope, elem, attrs) {
 
-                // Validate HTML in a rich text editor when it's used as a grid editor
+                    // Validate HTML in a rich text editor when it's used as a grid editor
 
-                // Read formatters for each grid editor from configuration in package.manifest,
-                // then apply those formatters to HTML as it is being saved. This is done on save rather 
-                // than on change to avoid moving the cursor unexpectedly in TinyMCE.
-                // Formatters are run only after all validators have passed.
-                var activeFormatters = ReadConfigForGridEditor(scope, "formatters", new RichTextFormatters());
+                    // Read formatters for each grid editor from configuration in package.manifest,
+                    // then apply those formatters to HTML as it is being saved. This is done on save rather 
+                    // than on change to avoid moving the cursor unexpectedly in TinyMCE.
+                    // Formatters are run only after all validators have passed.
+                    var activeFormatters = ReadConfigForGridEditor(scope, "formatters", new RichTextFormatters());
 
-                ApplyConfigToGridEditorOnSave(scope, activeFormatters, function (control, format) {
-                    control.value = format(control.value);
-                });
+                    ApplyConfigToGridEditorOnSave(scope, activeFormatters, function (control, format) {
+                        control.value = format(control.value);
+                    });
+                }
             }
-        }
-    })
+        })
 }());
