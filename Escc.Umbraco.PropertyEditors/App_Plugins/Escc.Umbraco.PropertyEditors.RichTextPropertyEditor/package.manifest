@@ -32,7 +32,7 @@
       "render": "~/Views/Partials/Grid/Editors/Rte.cshtml",
       "icon": "icon-edit",
       "config": {
-        "formatters": [ "nbsp", "removeEmptyLinks", "removeEmptyBlock", "removeTarget", "removeIfMissingAttribute", "autocorrect", "fullstopsOutsideLinks", "spacesOutsideLinks", "smartQuotes", "enDashes", "ellipsis", "startHeadingsWithCapital", "startContentWithCapital" ],
+        "formatters": [ "nbsp", "removeEmptyLinks", "removeEmptyBlock", "removeElement", "removeTarget", "removeIfMissingAttribute", "autocorrect", "fullstopsOutsideLinks", "spacesOutsideLinks", "smartQuotes", "enDashes", "ellipsis", "startHeadingsWithCapital", "startContentWithCapital" ],
         "validators": [ "clickHere", "linkToHere", "visit", "more", "allCaps", "urlAsLinkText" ]
       }
     }

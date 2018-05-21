@@ -268,6 +268,18 @@
             return value;
         }
 
+        // Remove unwanted elements - tinymceconfig.config has an <invalidElements /> setting for this but it is not applied.
+        var removeElementFormatter = function (value) {
+            if (value) {
+                var removeElements = ["font", "div"];
+                angular.forEach(removeElements, function (element) {
+                    var regEx = new RegExp("</?" + element + "( [^>]+)*>", "gi");
+                    value = value.replace(regEx, "");
+                });
+            }
+            return value;
+        }
+
         // Remove target attribute to ensure *users* get to choose whether to open links in a new window
         var removeTargetFormatter = function (value) {
             return value.replace(/ target=[^>][a-z_]+[^>]/i, "");
@@ -490,6 +502,7 @@
             nbsp: nbspFormatter,
             removeEmptyLinks: removeEmptyLinksFormatter,
             removeEmptyBlock: removeEmptyBlockFormatter,
+            removeElement: removeElementFormatter,
             removeTarget: removeTargetFormatter,
             removeIfMissingAttribute: removeIfMissingAttributeFormatter,
             autocorrect: autocorrectFormatter,

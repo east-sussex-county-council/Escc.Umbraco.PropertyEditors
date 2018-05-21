@@ -110,6 +110,7 @@
             { "name" : "nbsp", "displayName" : "Normalise HTML spaces" },
             { "name": "removeEmptyLinks", "displayName": "Remove empty links" },
             { "name": "removeEmptyBlock", "displayName": "Remove empty block elements" },
+            { "name": "removeUnwantedElements", "displayName": "Remove unwanted elements" },
             { "name" : "removeTarget", "displayName" : "Remove link targets" },
             { "name" : "removeIfMissingAttribute", "displayName" : "Remove tags with missing required attributes" },
             { "name" : "autocorrect", "displayName" : "Auto-correct common strings" },
