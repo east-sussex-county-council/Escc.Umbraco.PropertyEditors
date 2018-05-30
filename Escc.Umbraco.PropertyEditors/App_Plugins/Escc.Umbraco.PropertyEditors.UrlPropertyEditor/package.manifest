@@ -13,6 +13,11 @@
                         "view": "boolean",
                         "key": "rootRelative"
                     },
+					{
+                        "label": "Allow URLs with an internal hostname (no . in the hostname)",
+                        "view": "boolean",
+                        "key": "internal"
+                    },
                     {
                         "label": "Regular expression",
 						"description": "In addition to standard validation. For example, check for a specific domain.",

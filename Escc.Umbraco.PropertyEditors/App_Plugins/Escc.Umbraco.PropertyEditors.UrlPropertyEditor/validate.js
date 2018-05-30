@@ -72,7 +72,17 @@ angular.module("umbraco").directive("validateUrl", function () {
                         var urlToValidate = viewValue;
                         if (scope.model.config.rootRelative === "1") {
                             if (viewValue.indexOf("/") === 0) {
-                                urlToValidate = "http://example.org";
+                                urlToValidate = "http://example.org" + urlToValidate;
+                            }
+                        }
+
+                        // Allow internal URLs by appending a top-level domain for validation, but don't save the domain
+                        if (scope.model.config.internal === "1") {
+                            var isInternalDomain = new RegExp("[A-Za-z]+://[^.^/]+/");
+                            var match = urlToValidate.match(isInternalDomain);
+                            if (match) {
+                                var leftPartOfUrlLength = match[0].length - 1;
+                                urlToValidate = urlToValidate.substr(0, leftPartOfUrlLength) + ".com" + urlToValidate.substr(leftPartOfUrlLength);
                             }
                         }
 

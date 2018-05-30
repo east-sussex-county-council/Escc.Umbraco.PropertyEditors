@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Escc_Umbraco_PropertyEditors_AppPlugins Include="$(MSBuildProjectDirectory)\..\packages\Escc.Umbraco.PropertyEditors.6.1.3\Content\App_Plugins\**\*.*"/>
-    <Escc_Umbraco_PropertyEditors_Css Include="$(MSBuildProjectDirectory)\..\packages\Escc.Umbraco.PropertyEditors.6.1.3\Content\css\**\*.*"/>
+    <Escc_Umbraco_PropertyEditors_AppPlugins Include="$(MSBuildProjectDirectory)\..\packages\Escc.Umbraco.PropertyEditors.6.2.0\Content\App_Plugins\**\*.*"/>
+    <Escc_Umbraco_PropertyEditors_Css Include="$(MSBuildProjectDirectory)\..\packages\Escc.Umbraco.PropertyEditors.6.2.0\Content\css\**\*.*"/>
   </ItemGroup>
 
   <Target Name="Escc_Umbraco_PropertyEditors_CopyFiles" BeforeTargets="PrepareForBuild">
