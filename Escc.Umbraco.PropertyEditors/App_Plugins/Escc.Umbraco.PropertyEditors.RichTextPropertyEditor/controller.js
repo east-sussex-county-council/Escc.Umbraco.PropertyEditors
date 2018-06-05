@@ -502,7 +502,7 @@
             nbsp: nbspFormatter,
             removeEmptyLinks: removeEmptyLinksFormatter,
             removeEmptyBlock: removeEmptyBlockFormatter,
-            removeElement: removeElementFormatter,
+            removeUnwantedElements: removeElementFormatter,
             removeTarget: removeTargetFormatter,
             removeIfMissingAttribute: removeIfMissingAttributeFormatter,
             autocorrect: autocorrectFormatter,
