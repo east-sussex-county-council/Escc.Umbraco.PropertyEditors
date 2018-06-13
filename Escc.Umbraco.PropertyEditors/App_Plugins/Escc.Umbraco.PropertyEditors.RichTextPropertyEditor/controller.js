@@ -242,10 +242,41 @@
     // Each one should be a function which accepts one string argument and returns a string. 
     var RichTextFormatters = function () {
 
-        // Normalise spacing in HTML. This also removes non-breaking spaces.
+        /**
+         * Gets all the text nodes in an HTMLElement.
+         * From https://gist.github.com/Daniel-Hug/1415b4d027e3e9854456f4e812ea2ce1
+         * @param HTMLElement parent
+         */
+        function getTextNodes(parent) {
+            let all = [];
+            for (parent = parent.firstChild; parent; parent = parent.nextSibling) {
+                if (['SCRIPT', 'STYLE'].indexOf(parent.tagName) >= 0) continue;
+                if (parent.nodeType === Node.TEXT_NODE) all.push(parent);
+                else all = all.concat(getTextNodes(parent));
+            }
+            return all;
+        }
+
+        /**
+         * Applies a function to all the text nodes in an HTML string
+         * @param string html
+         * @param function func
+         */
+        function updateTextNodesInHtml(html, func) {
+            let dom = document.createElement("div");
+            dom.innerHTML = html;
+            let textNodes = getTextNodes(dom);
+            for (let i = 0; i < textNodes.length; i++) {
+                textNodes[i].nodeValue = func(textNodes[i].nodeValue);
+            }
+            return dom.innerHTML;
+        }
+
+        // Normalise spacing in HTML text nodes. This also removes non-breaking spaces.
         var nbspFormatter = function (value) {
-            value = value.replace(/\s+/gi, ' ');
-            return value;
+            return updateTextNodesInHtml(value, function (text) {
+                return text.replace(/\s+/gi, ' ');
+            });
         }
 
         // Remove empty links, which contain nothing white space, optionally surrounded by a span element
@@ -384,16 +415,11 @@
 
         // Replace hyphens-used-as-dashes with en-dashes
         var enDashesFormatter = function (value) {
-            value = value.replace(/([a-z0-9>)])\s+-\s+([(<a-z0-9])/gi, "$1 &#8211; $2"); // replace between clauses
-            value = value.replace(/([0-9])-([0-9])/gi, "$1&#8211;$2"); // replace numerical ranges
-
-            // undo previous within urls
-            var urlNDashPattern = /([a-z]:\/)?(\/?)([^\s]*)([0-9]+)(&#8211;|&ndash;)([0-9])/i;
-            while (urlNDashPattern.test(value)) {
-                value = value.replace(urlNDashPattern, "$1$2$3$4-$6");
-            }
-
-            return value;
+            return updateTextNodesInHtml(value, function (text) {
+                text = text.replace(/([a-z0-9>)])\s+-\s+([(<a-z0-9])/gi, "$1 – $2"); // replace between clauses
+                text = text.replace(/([0-9])-([0-9])/gi, "$1–$2"); // replace numerical ranges
+                return text;
+            });
         }
 
         // ellipsis - this takes several passes as the match stops when it finds 3 rather than greedily matching all consecutive . characters
@@ -709,14 +735,14 @@
                             scope.propertyForm.$setValidity(validator.id, valid);
                         }
                     }, function (alias) {
-                            // On each form submission, the first time a particular grid editor alias is encountered reset the valid state to true.
-                            // This allows validation to start again when resubmitting a page that has previously failed validation. By default it
-                            // starts from the previous result, which is false.
-                            for (var i = 0; i < activeValidators[alias].length; i++) {
-                                let validator = activeValidators[alias][i];
-                                scope.propertyForm.$setValidity(validator.id, true);
-                            }
-                        });
+                        // On each form submission, the first time a particular grid editor alias is encountered reset the valid state to true.
+                        // This allows validation to start again when resubmitting a page that has previously failed validation. By default it
+                        // starts from the previous result, which is false.
+                        for (var i = 0; i < activeValidators[alias].length; i++) {
+                            let validator = activeValidators[alias][i];
+                            scope.propertyForm.$setValidity(validator.id, true);
+                        }
+                    });
                 }
             }
         })
