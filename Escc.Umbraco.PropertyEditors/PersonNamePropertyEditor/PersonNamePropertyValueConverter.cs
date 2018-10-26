@@ -23,7 +23,7 @@ namespace Escc.Umbraco.PropertyEditors.PersonNamePropertyEditor
         /// <returns></returns>
         public override bool IsConverter(PublishedPropertyType propertyType)
         {
-            return propertyType.PropertyEditorAlias == PropertyEditorAliases.PersonNamePropertyEditor;
+            return propertyType.PropertyEditorAlias == "Escc.Umbraco.PropertyEditors.PersonNamePropertyEditor";
         }
 
         /// <summary>

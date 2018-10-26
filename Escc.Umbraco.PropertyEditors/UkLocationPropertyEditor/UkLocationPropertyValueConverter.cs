@@ -19,7 +19,7 @@ namespace Escc.Umbraco.PropertyEditors.UkLocationPropertyEditor
         /// <returns></returns>
         public override bool IsConverter(PublishedPropertyType propertyType)
         {
-            return propertyType.PropertyEditorAlias == PropertyEditorAliases.UkLocationPropertyEditor;
+            return propertyType.PropertyEditorAlias == "Escc.Umbraco.PropertyEditors.UkLocationPropertyEditor";
         }
 
         public override object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview)
