@@ -70,8 +70,8 @@
       <HintPath>..\packages\xmlrpcnet.2.5.0\lib\net20\CookComputing.XmlRpcV2.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Escc.AddressAndPersonalDetails, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Escc.AddressAndPersonalDetails.4.0.0\lib\netstandard2.0\Escc.AddressAndPersonalDetails.dll</HintPath>
+    <Reference Include="Escc.AddressAndPersonalDetails, Version=4.0.1.0, Culture=neutral, PublicKeyToken=06fad7304560ae6f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Escc.AddressAndPersonalDetails.4.0.1\lib\netstandard2.0\Escc.AddressAndPersonalDetails.dll</HintPath>
     </Reference>
     <Reference Include="Escc.Html, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Escc.Html.3.0.0\lib\netstandard2.0\Escc.Html.dll</HintPath>
